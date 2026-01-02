@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: bi-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: bi_warehouse
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d bi_warehouse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  airflow-webserver:
+    image: apache/airflow:2.9.3
+    container_name: airflow-webserver
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__WEBSERVER__SECRET_KEY: super_secret_key_change_in_production_123
+      PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
+    volumes:
+      - ./data_ingestion/dags:/opt/airflow/dags
+      - ./data_ingestion/scripts:/opt/airflow/scripts
+      - ./source:/opt/airflow/source
+    ports:
+      - "8080:8080"
+    command: webserver
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  airflow-scheduler:
+    image: apache/airflow:2.9.3
+    container_name: airflow-scheduler
+    depends_on:
+      airflow-webserver:
+        condition: service_healthy
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
+    volumes:
+      - ./data_ingestion/dags:/opt/airflow/dags
+      - ./data_ingestion/scripts:/opt/airflow/scripts
+      - ./source:/opt/airflow/source
+    command: scheduler
+
+volumes:
+  postgres_data:
