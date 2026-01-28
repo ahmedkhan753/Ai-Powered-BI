@@ -19,7 +19,8 @@ services:
       retries: 5
 
   airflow-webserver:
-    image: apache/airflow:2.9.3
+    build: .
+    # image: apache/airflow:2.9.3
     container_name: airflow-webserver
     depends_on:
       postgres:
@@ -33,6 +34,7 @@ services:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
       - ./source:/opt/airflow/source
+      - ./data_transform:/opt/airflow/data_transform
     ports:
       - "8080:8080"
     command: webserver
@@ -43,7 +45,8 @@ services:
       retries: 5
 
   airflow-scheduler:
-    image: apache/airflow:2.9.3
+    build: .
+    # image: apache/airflow:2.9.3
     container_name: airflow-scheduler
     depends_on:
       airflow-webserver:
@@ -56,6 +59,7 @@ services:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
       - ./source:/opt/airflow/source
+      - ./data_transform:/opt/airflow/data_transform
     command: scheduler
 
 volumes:
