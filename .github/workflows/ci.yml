@@ -47,7 +47,8 @@ jobs:
           export AIRFLOW_HOME=${PWD}/airflow
           export AIRFLOW__CORE__DAGS_FOLDER=${PWD}/data_ingestion/dags
           export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql://admin:password123@localhost:5432/bi_warehouse"
-          airflow db init
+          airflow db migrate
+          airflow connections create-default-connections
 
       - name: Check Airflow health
         run: |
