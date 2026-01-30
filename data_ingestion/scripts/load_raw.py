@@ -3,8 +3,8 @@ import logging
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
+from config import DATABASE_URL
 
-DATABASE_URL = "postgresql://admin:password123@postgres:5432/bi_warehouse"
 
 def load_raw_sales(df: pd.DataFrame) -> int:
     """
