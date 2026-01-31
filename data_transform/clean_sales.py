@@ -46,13 +46,10 @@ class CleanSales:
 
         # Created a new column for money spent categorization
         
-
         median_spent = df['sales_amount'].median()
-
         df['spend_category'] = np.where(
         df['sales_amount'] > median_spent,'A','B'
         )
-
         return df
     
 
