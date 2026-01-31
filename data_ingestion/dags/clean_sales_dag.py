@@ -1,10 +1,16 @@
 import sys
 import os
-sys.path.append(os.environ.get('AIRFLOW_HOME', '/opt/airflow'))
-
+from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta
+
+# Get the absolute path to the directory where THIS dag file lives
+# Then go up one level to reach the root project folder
+dag_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.dirname(dag_dir)
+
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
 
 from data_transform.clean_ingestion import clean_ingestion_pipeline
 

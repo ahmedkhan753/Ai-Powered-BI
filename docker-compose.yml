@@ -50,10 +50,15 @@ services:
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
       AIRFLOW__WEBSERVER__SECRET_KEY: super_secret_key_change_in_production_123
       PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
+      RAW_DB_HOST: postgres
+      RAW_DB_PORT: 5432
+      CLEAN_DB_HOST: clean-warehouse-postgres
+      CLEAN_DB_PORT: 5432
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
       - ./source:/opt/airflow/source
+      - ./data_transform:/opt/airflow/data_transform
     ports:
       - "8080:8080"
     command: webserver
@@ -73,10 +78,15 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
       PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
+      RAW_DB_HOST: postgres
+      RAW_DB_PORT: 5432
+      CLEAN_DB_HOST: clean-warehouse-postgres
+      CLEAN_DB_PORT: 5432
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
       - ./source:/opt/airflow/source
+      - ./data_transform:/opt/airflow/data_transform
     command: scheduler
 
 volumes:

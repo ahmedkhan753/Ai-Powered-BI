@@ -1,8 +1,8 @@
-from raw_data_fetcher import raw_data_fetcher
-from raw_data_fetcher import engine, query
+from data_transform.raw_data_fetcher import raw_data_fetcher
+from data_transform.raw_data_fetcher import engine, query
 import pandas as pd
-from load_clean_data import load_clean_data, extract_clean_data
-from clean_sales import CleanSales
+from data_transform.load_clean_data import load_clean_data, extract_clean_data
+from data_transform.clean_sales import CleanSales
 
 def clean_ingestion_pipeline():
     raw_data = raw_data_fetcher(query, engine)

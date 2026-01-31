@@ -1,9 +1,12 @@
 import logging
+import os
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 
-database_url = "postgresql://admin:password123@localhost:5433/bi_warehouse"
+db_host = os.getenv("RAW_DB_HOST", "localhost")
+db_port = os.getenv("RAW_DB_PORT", "5433")
+database_url = f"postgresql://admin:password123@{db_host}:{db_port}/bi_warehouse"
 engine = create_engine(database_url)
 query = "SELECT * FROM raw.sales_data;"
 

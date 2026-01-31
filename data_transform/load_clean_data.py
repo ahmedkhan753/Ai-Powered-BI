@@ -1,12 +1,14 @@
 # Going to load data from bronze layer to silver layer
 import pandas as pd
-from clean_sales import CleanSales
-from raw_data_fetcher import engine, query, raw_data_fetcher
+from data_transform.clean_sales import CleanSales
+from data_transform.raw_data_fetcher import engine, query, raw_data_fetcher
 from sqlalchemy import create_engine
+import os
 
-engine_clean = create_engine("postgresql://admin:password123@localhost:5434/bi_warehouse_clean")
-
-clean_db_url = "postgresql://admin:password123@localhost:5434/bi_warehouse_clean"
+clean_db_host = os.getenv("CLEAN_DB_HOST", "localhost")
+clean_db_port = os.getenv("CLEAN_DB_PORT", "5434")
+clean_db_url = f"postgresql://admin:password123@{clean_db_host}:{clean_db_port}/bi_warehouse_clean"
+engine_clean = create_engine(clean_db_url)
 def extract_clean_data() -> pd.DataFrame:
     raw_data = raw_data_fetcher(query, engine)
     cleaner = CleanSales(raw_data)
