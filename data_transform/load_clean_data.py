@@ -22,3 +22,8 @@ def load_clean_data(clean_data):
         index=False,
         method="multi"
     )
+
+if __name__ == "__main__":
+    clean_data = extract_clean_data()
+    load_clean_data(clean_data)
+    print("Clean data loaded successfully!")
