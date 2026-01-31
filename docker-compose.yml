@@ -45,8 +45,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      clean-warehouse-postgres:   # ←  Airflow wait for both DBs
-        condition: service_healthy
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
@@ -70,8 +68,6 @@ services:
     container_name: airflow-scheduler
     depends_on:
       airflow-webserver:
-        condition: service_healthy
-      clean-warehouse-postgres:   # ← wait for clean DB too
         condition: service_healthy
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
