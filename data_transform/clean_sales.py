@@ -1,7 +1,7 @@
 from raw_data_fetcher import raw_data_fetcher
 from raw_data_fetcher import engine, query
 import pandas as pd
-
+import numpy as np
 
 
 class CleanSales:
@@ -43,6 +43,15 @@ class CleanSales:
         df = df[df['sales_amount'] >= 0]
         df = df[df['quantity'] >= 0]
         df = df[df['price'] >= 0]
+
+        # Created a new column for money spent categorization
+        
+
+        median_spent = df['sales_amount'].median()
+
+        df['spend_category'] = np.where(
+        df['sales_amount'] > median_spent,'A','B'
+        )
 
         return df
     
