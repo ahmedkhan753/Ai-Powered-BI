@@ -11,7 +11,7 @@ default_args = {
     'owner': 'you',
     'depends_on_past': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=2),
 }
 
 with DAG(
