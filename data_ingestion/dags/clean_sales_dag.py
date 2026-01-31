@@ -4,15 +4,26 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-# Get the absolute path to the directory where THIS dag file lives
-# Then go up one level to reach the root project folder
-dag_dir = os.path.dirname(os.path.abspath(__file__))
-root_dir = os.path.dirname(dag_dir)
+def run_cleaning_wrapper():
+    import sys
+    import os
+    import logging
+    
+    # Debugging: Print current path and directories in /opt/airflow
+    logging.info(f"Current sys.path: {sys.path}")
+    try:
+        logging.info(f"Contents of /opt/airflow: {os.listdir('/opt/airflow')}")
+        logging.info(f"Contents of /opt/airflow/data_transform: {os.listdir('/opt/airflow/data_transform')}")
+    except Exception as e:
+        logging.warning(f"Could not list directories: {e}")
 
-if root_dir not in sys.path:
-    sys.path.insert(0, root_dir)
+    # Ensure root is in path
+    root_dir = '/opt/airflow'
+    if root_dir not in sys.path:
+        sys.path.append(root_dir)
 
-from data_transform.clean_ingestion import clean_ingestion_pipeline
+    from data_transform.clean_ingestion import clean_ingestion_pipeline
+    clean_ingestion_pipeline()
 
 default_args = {
     'owner': 'admin',
@@ -32,7 +43,7 @@ with DAG(
 
     run_cleaning = PythonOperator(
         task_id='run_silver_cleaning',
-        python_callable=clean_ingestion_pipeline, 
+        python_callable=run_cleaning_wrapper, 
     )
 
     run_cleaning
