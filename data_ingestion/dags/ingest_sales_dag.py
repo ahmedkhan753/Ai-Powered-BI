@@ -4,6 +4,7 @@ sys.path.append('/opt/airflow/scripts')
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 from scripts.ingest_sales import ingest_sales_pipeline
 
@@ -29,7 +30,12 @@ with DAG(
         python_callable=ingest_sales_pipeline,
     )
 
-    run_ingestion
+    trigger_silver = TriggerDagRunOperator(
+        task_id='trigger_silver_cleaning',
+        trigger_dag_id='sales_silver_cleaning_pipeline', 
+        wait_for_completion=False,
+    )
+    run_ingestion >> trigger_silver 
 
   
     if __name__ == "__main__":
