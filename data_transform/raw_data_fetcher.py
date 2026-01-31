@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 
-database_url = "postgresql://admin:password123@localhost:5433/bi_warehouse_raw"
+database_url = "postgresql://admin:password123@localhost:5433/bi_warehouse"
 engine = create_engine(database_url)
 query = "SELECT * FROM raw.sales_data;"
 
