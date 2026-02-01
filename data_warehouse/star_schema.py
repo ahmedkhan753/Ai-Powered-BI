@@ -7,7 +7,7 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy import create_engine
 import os
-from dotenv import load_dotenv
+from load_from_silver import load_from_silver
 
 # 3. Define database connection parameters
 DB_USER = os.getenv("DB_USER")
@@ -18,6 +18,7 @@ DB_NAME = os.getenv("DB_NAME")
 
 # 4. Create database connection
 engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+silver_data = load_from_silver()
 
 # 5. Define the star schema
 class StarSchema:
