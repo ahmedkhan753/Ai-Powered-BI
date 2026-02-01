@@ -9,9 +9,6 @@ from sqlalchemy import create_engine
 import os
 from dotenv import load_dotenv
 
-# 2. Load environment variables
-load_dotenv()
-
 # 3. Define database connection parameters
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
