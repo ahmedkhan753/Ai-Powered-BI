@@ -9,15 +9,11 @@ from sqlalchemy import create_engine
 import os
 from load_from_silver import load_from_silver
 
-# 3. Define database connection parameters
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
+gold_db_host = os.getenv("GOLD_DB_HOST", "localhost")
+gold_db_port = os.getenv("GOLD_DB_PORT", "5434")
+gold_db_url = f"postgresql://admin:password123@{gold_db_host}:{gold_db_port}/bi_warehouse_warehouse"
+engine_gold = create_engine(gold_db_url)
 
-# 4. Create database connection
-engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
 silver_data = load_from_silver()
 
 # 5. Define the star schema
