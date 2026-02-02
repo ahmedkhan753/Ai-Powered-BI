@@ -54,6 +54,8 @@ services:
       RAW_DB_PORT: 5432
       CLEAN_DB_HOST: clean-warehouse-postgres
       CLEAN_DB_PORT: 5432
+      GOLD_DB_HOST: clean-warehouse-postgres
+      GOLD_DB_PORT: 5432
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
