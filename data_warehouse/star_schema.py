@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 import os
 import uuid
 import datetime
-from load_from_silver import load_from_silver
+from data_warehouse.load_from_silver import load_from_silver
 
 # Define database connection parameters inside the function/class scope to avoid side effects on import.
 

@@ -1,0 +1,42 @@
+[2026-02-02T16:11:57.709+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-02-02T16:11:57.792+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:01:02.769315+00:00 [queued]>
+[2026-02-02T16:11:57.811+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:01:02.769315+00:00 [queued]>
+[2026-02-02T16:11:57.812+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-02-02T16:11:57.872+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_star_schema_population> on 2026-02-02 16:01:02.769315+00:00
+[2026-02-02T16:11:57.878+0000] {standard_task_runner.py:64} INFO - Started process 47 to run task
+[2026-02-02T16:11:57.884+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'star_schema_pipeline', 'run_star_schema_population', 'manual__2026-02-02T16:01:02.769315+00:00', '--job-id', '509', '--raw', '--subdir', 'DAGS_FOLDER/star_schema_dag.py', '--cfg-path', '/tmp/tmp5_4dzxvl']
+[2026-02-02T16:11:57.887+0000] {standard_task_runner.py:91} INFO - Job 509: Subtask run_star_schema_population
+[2026-02-02T16:11:58.062+0000] {task_command.py:426} INFO - Running <TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:01:02.769315+00:00 [running]> on host 0cea7ca30c10
+[2026-02-02T16:11:58.335+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='admin' AIRFLOW_CTX_DAG_ID='star_schema_pipeline' AIRFLOW_CTX_TASK_ID='run_star_schema_population' AIRFLOW_CTX_EXECUTION_DATE='2026-02-02T16:01:02.769315+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-02T16:01:02.769315+00:00'
+[2026-02-02T16:11:58.338+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-02-02T16:11:59.393+0000] {star_schema_dag.py:18} ERROR - Error running star schema ETL: No module named 'load_from_silver'
+[2026-02-02T16:11:59.394+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-02-02T16:11:59.395+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/star_schema_dag.py", line 19, in run_star_schema_wrapper
+    raise e
+  File "/opt/airflow/dags/star_schema_dag.py", line 15, in run_star_schema_wrapper
+    from data_warehouse.star_schema import run_star_schema_etl
+  File "/opt/airflow/data_warehouse/star_schema.py", line 11, in <module>
+    from load_from_silver import load_from_silver
+ModuleNotFoundError: No module named 'load_from_silver'
+[2026-02-02T16:11:59.441+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=star_schema_pipeline, task_id=run_star_schema_population, run_id=manual__2026-02-02T16:01:02.769315+00:00, execution_date=20260202T160102, start_date=20260202T161157, end_date=20260202T161159
+[2026-02-02T16:11:59.505+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 509 for task run_star_schema_population (No module named 'load_from_silver'; 47)
+[2026-02-02T16:11:59.549+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-02-02T16:11:59.598+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-02T16:11:59.603+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
