@@ -51,10 +51,9 @@ class StarSchema:
         # --- Dim Product ---
         print("Building dim_product...")
         # Get unique products
+        # Mapping 'product' from silver to 'category' in dim_product based on instructions
         unique_products = self.silver_data[['product']].drop_duplicates()
-        # Map 'product' to 'product_name' and set a default 'category'
-        unique_products = unique_products.rename(columns={'product': 'product_name'})
-        unique_products['category'] = 'General' # Default category as we only have product name
+        unique_products = unique_products.rename(columns={'product': 'category'})
         
         # Add attributes
         unique_products['start_date'] = datetime.date.today()
@@ -106,9 +105,9 @@ class StarSchema:
         self.silver_data['date_key'] = pd.to_datetime(self.silver_data['sale_date']).dt.strftime('%Y%m%d').astype(int)
         
         # 2. Get Product Key
-        dim_product = pd.read_sql("SELECT product_key, product_name FROM warehouse.dim_product", self.engine)
-        # Match on product_name since that's what we have
-        fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='product_name', how='left')
+        dim_product = pd.read_sql("SELECT product_key, category FROM warehouse.dim_product", self.engine)
+        # Match on category since that's what we have
+        fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='category', how='left')
         
         # 3. Get Customer Key
         dim_customer = pd.read_sql("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer", self.engine)
