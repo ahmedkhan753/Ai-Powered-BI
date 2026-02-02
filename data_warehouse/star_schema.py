@@ -45,8 +45,16 @@ class StarSchema:
         dim_date['weekday_name'] = dim_date['full_date'].dt.day_name()
         dim_date['is_weekend'] = dim_date['full_date'].dt.weekday >= 5
         
-        # Load into database
-        dim_date.to_sql('dim_date', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        # Check existing dates
+        existing_dates = pd.read_sql("SELECT date_key FROM warehouse.dim_date", self.engine)
+        if not existing_dates.empty:
+            dim_date = dim_date[~dim_date['date_key'].isin(existing_dates['date_key'])]
+            
+        if not dim_date.empty:
+            print(f"Inserting {len(dim_date)} new rows into dim_date")
+            dim_date.to_sql('dim_date', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        else:
+            print("dim_date is up to date.")
 
         # --- Dim Product ---
         print("Building dim_product...")
@@ -60,10 +68,18 @@ class StarSchema:
         unique_products['end_date'] = None
         unique_products['is_current'] = True
         
-        # We need a primary key 'product_key'.
-        unique_products['product_key'] = range(1, len(unique_products) + 1)
+        # Check existing products (by category)
+        existing_products = pd.read_sql("SELECT category FROM warehouse.dim_product", self.engine)
+        if not existing_products.empty:
+            unique_products = unique_products[~unique_products['category'].isin(existing_products['category'])]
+            
+        # We rely on DB SERIAL for product_key, so we don't generate it here.
         
-        unique_products.to_sql('dim_product', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        if not unique_products.empty:
+            print(f"Inserting {len(unique_products)} new rows into dim_product")
+            unique_products.to_sql('dim_product', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        else:
+            print("dim_product is up to date.")
 
 
         # --- Dim Customer ---
@@ -93,10 +109,25 @@ class StarSchema:
         dim_customer['end_date'] = None
         dim_customer['is_current'] = True
         
-        # Generate surrogate key
-        dim_customer['customer_key'] = range(1, len(dim_customer) + 1)
+        # Check existing customers
+        # We can join on 'gender', 'age', 'spend_category' to filter
+        existing_customers = pd.read_sql("SELECT gender, age, spend_category FROM warehouse.dim_customer", self.engine)
         
-        dim_customer.to_sql('dim_customer', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        if not existing_customers.empty:
+            # Create a composite key for easier filtering
+            dim_customer['_key'] = dim_customer['gender'].astype(str) + '_' + dim_customer['age'].astype(str) + '_' + dim_customer['spend_category'].astype(str)
+            existing_customers['_key'] = existing_customers['gender'].astype(str) + '_' + existing_customers['age'].astype(str) + '_' + existing_customers['spend_category'].astype(str)
+            
+            dim_customer = dim_customer[~dim_customer['_key'].isin(existing_customers['_key'])]
+            dim_customer = dim_customer.drop(columns=['_key'])
+        
+        # Rely on DB SERIAL for customer_key
+        
+        if not dim_customer.empty:
+            print(f"Inserting {len(dim_customer)} new rows into dim_customer")
+            dim_customer.to_sql('dim_customer', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        else:
+             print("dim_customer is up to date.")
         
     def build_fact_table(self):
         # Merge source data with dimensions to get keys
@@ -105,13 +136,12 @@ class StarSchema:
         self.silver_data['date_key'] = pd.to_datetime(self.silver_data['sale_date']).dt.strftime('%Y%m%d').astype(int)
         
         # 2. Get Product Key
+        # Fetch fresh keys from DB (inc. newly inserted ones)
         dim_product = pd.read_sql("SELECT product_key, category FROM warehouse.dim_product", self.engine)
-        # Match on category since that's what we have
         fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='category', how='left')
         
         # 3. Get Customer Key
         dim_customer = pd.read_sql("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer", self.engine)
-        # Join on all defining attributes
         fact_merged = fact_merged.merge(dim_customer, left_on=['gender', 'customer_age', 'spend_category'], right_on=['gender', 'age', 'spend_category'], how='left')
         
         # 4. Prepare Fact Table
