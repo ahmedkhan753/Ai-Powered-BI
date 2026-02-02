@@ -51,25 +51,19 @@ class StarSchema:
         # --- Dim Product ---
         print("Building dim_product...")
         # Get unique products
-        # Mapping 'product' from silver to 'category' in dim_product based on ERD (assuming simple mapping for now)
         unique_products = self.silver_data[['product']].drop_duplicates()
-        unique_products = unique_products.rename(columns={'product': 'category'}) # Based on ERD, assuming product name is category or similar
+        # Map 'product' to 'product_name' and set a default 'category'
+        unique_products = unique_products.rename(columns={'product': 'product_name'})
+        unique_products['category'] = 'General' # Default category as we only have product name
         
         # Add attributes
         unique_products['start_date'] = datetime.date.today()
         unique_products['end_date'] = None
         unique_products['is_current'] = True
         
-        # We need a primary key 'product_key'. In a real SCD, this is a surrogate key.
-        # For simplicity in this load, we'll let the DB handle the serial PK if possible, 
-        # but toMap back for the fact table, we might need to fetch it back or generate it here if not autoincrement.
-        # Assuming we can just insert and the DB has a SERIAL PRIMARY KEY. 
-        # However, to link to Fact table, we usually need the keys. 
-        # Let's assume we generate a simple surrogate key here for the initial load.
+        # We need a primary key 'product_key'.
         unique_products['product_key'] = range(1, len(unique_products) + 1)
         
-        # Reorder columns to match ERD if consistent, but pandas to_sql matches by name
-        # ERD: product_key, category, start_date, end_date, is_current
         unique_products.to_sql('dim_product', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
 
 
@@ -112,12 +106,9 @@ class StarSchema:
         self.silver_data['date_key'] = pd.to_datetime(self.silver_data['sale_date']).dt.strftime('%Y%m%d').astype(int)
         
         # 2. Get Product Key
-        # We need to fetch the dimension we just created or regenerate the mapping.
-        # For simplicity, we'll re-read or assume the same logic since we just loaded it.
-        # But best practice is to read back from DB to get the assigned SKs.
-        dim_product = pd.read_sql("SELECT product_key, category FROM warehouse.dim_product", self.engine)
-        # Note: silver 'product' maps to dim 'category'
-        fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='category', how='left')
+        dim_product = pd.read_sql("SELECT product_key, product_name FROM warehouse.dim_product", self.engine)
+        # Match on product_name since that's what we have
+        fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='product_name', how='left')
         
         # 3. Get Customer Key
         dim_customer = pd.read_sql("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer", self.engine)
@@ -125,17 +116,18 @@ class StarSchema:
         fact_merged = fact_merged.merge(dim_customer, left_on=['gender', 'customer_age', 'spend_category'], right_on=['gender', 'age', 'spend_category'], how='left')
         
         # 4. Prepare Fact Table
-        # ERD: sales_key (PK), order_id, date_key, customer_key, product_key, quantity, price, sales_amount, ingestion_time
         
         fact_sales = pd.DataFrame()
-        fact_sales['order_id'] = [uuid.uuid4() for _ in range(len(fact_merged))]
+        # Generate Integer Order ID
+        # Since we don't have real order IDs, we'll use a sequence starting from 1000
+        fact_sales['order_id'] = range(1000, 1000 + len(fact_merged))
         fact_sales['date_key'] = fact_merged['date_key']
         fact_sales['customer_key'] = fact_merged['customer_key']
         fact_sales['product_key'] = fact_merged['product_key']
         fact_sales['quantity'] = fact_merged['quantity']
         fact_sales['price'] = fact_merged['price']
         fact_sales['sales_amount'] = fact_merged['sales_amount']
-        fact_sales['ingestion_time'] = datetime.datetime.now()
+        fact_sales['ingestion_timestamp'] = datetime.datetime.now()
         
         # sales_key is likely an auto-increment PK in the DB.
         
