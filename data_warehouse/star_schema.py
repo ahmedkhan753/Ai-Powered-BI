@@ -19,11 +19,24 @@ class StarSchema:
         self.silver_data = silver_data
 
     def build_star_schema(self):
+        # Ensure schema exists using a raw connection to avoid transaction issues with some drivers
+        with self.engine.connect() as conn:
+            conn.execute(sqlalchemy.text("CREATE SCHEMA IF NOT EXISTS warehouse;"))
+            conn.commit()
+
         # Build the star schema
         print("Building Dimension Tables...")
         self.build_dimension_tables()
         print("Building Fact Table...")
         self.build_fact_table()
+
+    def get_existing_data(self, query):
+        """Helper to read existing data, returning empty DF if table doesn't exist."""
+        try:
+            return pd.read_sql(query, self.engine)
+        except Exception:
+            # Likely table doesn't exist yet
+            return pd.DataFrame()
 
     def build_dimension_tables(self):
         # --- Dim Date ---
@@ -162,8 +175,8 @@ class StarSchema:
 
 def run_star_schema_etl():
     # Define database connection parameters
-    gold_db_host = os.getenv("GOLD_DB_HOST", "localhost")
-    gold_db_port = os.getenv("GOLD_DB_PORT", "5434")
+    gold_db_host = os.getenv("GOLD_DB_HOST", "clean-warehouse-postgres")
+    gold_db_port = os.getenv("GOLD_DB_PORT", "5432")
     db_user = os.getenv("POSTGRES_USER", "admin")
     db_password = os.getenv("POSTGRES_PASSWORD", "password123")
     
