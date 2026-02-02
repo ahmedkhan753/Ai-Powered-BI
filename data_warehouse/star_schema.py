@@ -10,11 +10,7 @@ import uuid
 import datetime
 from load_from_silver import load_from_silver
 
-# Define database connection parameters
-gold_db_host = os.getenv("GOLD_DB_HOST", "localhost")
-gold_db_port = os.getenv("GOLD_DB_PORT", "5434")
-gold_db_url = f"postgresql://admin:password123@{gold_db_host}:{gold_db_port}/bi_warehouse_warehouse"
-engine_gold = create_engine(gold_db_url)
+# Define database connection parameters inside the function/class scope to avoid side effects on import.
 
 # 5. Define the star schema
 class StarSchema:
@@ -163,15 +159,26 @@ class StarSchema:
         fact_sales.to_sql('fact_sales', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
 
 
+
+def run_star_schema_etl():
+    # Define database connection parameters
+    gold_db_host = os.getenv("GOLD_DB_HOST", "localhost")
+    gold_db_port = os.getenv("GOLD_DB_PORT", "5434")
+    gold_db_url = f"postgresql://admin:password123@{gold_db_host}:{gold_db_port}/bi_warehouse_warehouse"
+    engine_gold = create_engine(gold_db_url)
+    
+    try:
+        # Load data
+        print("Loading silver data...")
+        silver_data_df = load_from_silver()
+        
+        # Initialize and run Star Schema build
+        star_schema = StarSchema(engine_gold, silver_data_df)
+        star_schema.build_star_schema()
+        print("Star schema built successfully!")
+    finally:
+        # Close connection
+        engine_gold.dispose()
+
 if __name__ == "__main__":
-    # Load data
-    print("Loading silver data...")
-    silver_data_df = load_from_silver()
-    
-    # Initialize and run Star Schema build
-    star_schema = StarSchema(engine_gold, silver_data_df)
-    star_schema.build_star_schema()
-    
-    # Close connection
-    engine_gold.dispose()
-    print("Star schema built successfully!")
+    run_star_schema_etl()

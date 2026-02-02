@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 
 def run_cleaning_wrapper():
     import sys
@@ -46,4 +47,10 @@ with DAG(
         python_callable=run_cleaning_wrapper, 
     )
 
-    run_cleaning
+    trigger_star_schema = TriggerDagRunOperator(
+        task_id='trigger_star_schema_population',
+        trigger_dag_id='star_schema_pipeline', 
+        wait_for_completion=False,
+    )
+
+    run_cleaning >> trigger_star_schema
