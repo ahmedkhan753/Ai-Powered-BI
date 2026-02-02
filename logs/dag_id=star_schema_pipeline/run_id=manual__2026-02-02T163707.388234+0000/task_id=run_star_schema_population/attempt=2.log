@@ -1,0 +1,27 @@
+[2026-02-02T16:43:10.520+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-02-02T16:43:10.585+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:37:07.388234+00:00 [queued]>
+[2026-02-02T16:43:10.599+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:37:07.388234+00:00 [queued]>
+[2026-02-02T16:43:10.601+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-02-02T16:43:10.666+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): run_star_schema_population> on 2026-02-02 16:37:07.388234+00:00
+[2026-02-02T16:43:10.674+0000] {standard_task_runner.py:64} INFO - Started process 47 to run task
+[2026-02-02T16:43:10.679+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'star_schema_pipeline', 'run_star_schema_population', 'manual__2026-02-02T16:37:07.388234+00:00', '--job-id', '560', '--raw', '--subdir', 'DAGS_FOLDER/star_schema_dag.py', '--cfg-path', '/tmp/tmpujesnjvh']
+[2026-02-02T16:43:10.683+0000] {standard_task_runner.py:91} INFO - Job 560: Subtask run_star_schema_population
+[2026-02-02T16:43:10.814+0000] {task_command.py:426} INFO - Running <TaskInstance: star_schema_pipeline.run_star_schema_population manual__2026-02-02T16:37:07.388234+00:00 [running]> on host b3b10c89bc2f
+[2026-02-02T16:43:11.076+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='admin' AIRFLOW_CTX_DAG_ID='star_schema_pipeline' AIRFLOW_CTX_TASK_ID='run_star_schema_population' AIRFLOW_CTX_EXECUTION_DATE='2026-02-02T16:37:07.388234+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-02T16:37:07.388234+00:00'
+[2026-02-02T16:43:11.079+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-02-02T16:43:12.073+0000] {logging_mixin.py:188} INFO - Loading silver data...
+[2026-02-02T16:43:12.131+0000] {logging_mixin.py:188} INFO - Building Dimension Tables...
+[2026-02-02T16:43:12.133+0000] {logging_mixin.py:188} INFO - Building dim_date...
+[2026-02-02T16:43:12.238+0000] {logging_mixin.py:188} INFO - Inserting 268 new rows into dim_date
+[2026-02-02T16:43:12.320+0000] {logging_mixin.py:188} INFO - Building dim_product...
+[2026-02-02T16:43:12.337+0000] {logging_mixin.py:188} INFO - Inserting 3 new rows into dim_product
+[2026-02-02T16:43:12.349+0000] {logging_mixin.py:188} INFO - Building dim_customer...
+[2026-02-02T16:43:12.365+0000] {logging_mixin.py:188} INFO - Inserting 173 new rows into dim_customer
+[2026-02-02T16:43:12.409+0000] {logging_mixin.py:188} INFO - Building Fact Table...
+[2026-02-02T16:43:12.579+0000] {logging_mixin.py:188} INFO - Star schema built successfully!
+[2026-02-02T16:43:12.581+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-02-02T16:43:12.582+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-02-02T16:43:12.599+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=star_schema_pipeline, task_id=run_star_schema_population, run_id=manual__2026-02-02T16:37:07.388234+00:00, execution_date=20260202T163707, start_date=20260202T164310, end_date=20260202T164312
+[2026-02-02T16:43:12.660+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-02-02T16:43:12.699+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-02T16:43:12.704+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

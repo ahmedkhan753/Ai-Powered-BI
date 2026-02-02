@@ -201,3 +201,101 @@
 [2026-02-02T16:31:38.883+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:31:38.883+0000] {dag.py:3089} INFO - Sync 1 DAGs
 [2026-02-02T16:31:38.916+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:31:38.916+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
 [2026-02-02T16:31:39.011+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.267 seconds
+[2026-02-02T16:36:16.034+0000] {processor.py:161} INFO - Started process (PID=26) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:16.037+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:36:16.042+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:16.041+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:16.099+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:16.226+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:16.225+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:36:16.276+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:16.275+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:36:16.323+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.312 seconds
+[2026-02-02T16:36:46.902+0000] {processor.py:161} INFO - Started process (PID=69) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:46.906+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:36:46.912+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:46.912+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:46.981+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:36:47.061+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:47.061+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:36:47.105+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:36:47.104+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:36:47.222+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.341 seconds
+[2026-02-02T16:37:17.626+0000] {processor.py:161} INFO - Started process (PID=103) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:17.628+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:37:17.631+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:17.631+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:17.689+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:17.728+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:17.728+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:37:17.755+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:17.754+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:37:17.834+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.217 seconds
+[2026-02-02T16:37:48.216+0000] {processor.py:161} INFO - Started process (PID=107) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:48.218+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:37:48.221+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:48.221+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:48.274+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:37:48.341+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:48.341+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:37:48.363+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:37:48.362+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:37:48.440+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.240 seconds
+[2026-02-02T16:38:19.171+0000] {processor.py:161} INFO - Started process (PID=111) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:19.173+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:38:19.178+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:19.177+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:19.262+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:19.333+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:19.333+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:38:19.374+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:19.373+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:38:19.418+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.265 seconds
+[2026-02-02T16:38:49.897+0000] {processor.py:161} INFO - Started process (PID=115) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:49.900+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:38:49.906+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:49.905+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:49.990+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:38:50.084+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:50.083+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:38:50.137+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:38:50.137+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:38:50.239+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.359 seconds
+[2026-02-02T16:39:20.677+0000] {processor.py:161} INFO - Started process (PID=119) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:39:20.679+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:39:20.683+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:39:20.682+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:39:20.739+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:39:20.815+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:39:20.815+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:39:20.866+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:39:20.865+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:39:20.948+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.282 seconds
+[2026-02-02T16:42:58.934+0000] {processor.py:161} INFO - Started process (PID=26) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:42:58.936+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:42:58.941+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:42:58.940+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:42:59.004+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:42:59.101+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:42:59.101+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:42:59.132+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:42:59.132+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:42:59.178+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.262 seconds
+[2026-02-02T16:43:29.778+0000] {processor.py:161} INFO - Started process (PID=60) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:43:29.780+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:43:29.783+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:43:29.782+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:43:29.824+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:43:29.875+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:43:29.874+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:43:29.902+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:43:29.902+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:43:29.939+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.170 seconds
+[2026-02-02T16:44:00.266+0000] {processor.py:161} INFO - Started process (PID=93) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:00.268+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:44:00.271+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:00.270+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:00.320+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:00.382+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:00.382+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:44:00.449+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:00.448+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:44:00.507+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.250 seconds
+[2026-02-02T16:44:30.980+0000] {processor.py:161} INFO - Started process (PID=97) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:30.981+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:44:30.985+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:30.985+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:31.036+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:44:31.080+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:31.080+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:44:31.103+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:44:31.103+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:44:31.151+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.181 seconds
+[2026-02-02T16:45:01.767+0000] {processor.py:161} INFO - Started process (PID=102) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:01.770+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:45:01.774+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:01.773+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:01.828+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:01.876+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:01.875+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:45:01.904+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:01.904+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:45:01.936+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.179 seconds
+[2026-02-02T16:45:32.388+0000] {processor.py:161} INFO - Started process (PID=145) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:32.391+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:45:32.394+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:32.393+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:32.442+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:45:32.491+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:32.490+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:45:32.515+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:45:32.515+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:45:32.590+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.216 seconds
+[2026-02-02T16:46:03.293+0000] {processor.py:161} INFO - Started process (PID=159) to work on /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:46:03.296+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/clean_sales_dag.py for tasks to queue
+[2026-02-02T16:46:03.301+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:46:03.300+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:46:03.390+0000] {processor.py:840} INFO - DAG(s) 'sales_silver_cleaning_pipeline' retrieved from /opt/airflow/dags/clean_sales_dag.py
+[2026-02-02T16:46:03.476+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:46:03.476+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-02T16:46:03.514+0000] {logging_mixin.py:188} INFO - [2026-02-02T16:46:03.514+0000] {dag.py:3947} INFO - Setting next_dagrun for sales_silver_cleaning_pipeline to None, run_after=None
+[2026-02-02T16:46:03.562+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/clean_sales_dag.py took 0.290 seconds
