@@ -19,10 +19,9 @@ class StarSchema:
         self.silver_data = silver_data
 
     def build_star_schema(self):
-        # Ensure schema exists using a raw connection to avoid transaction issues with some drivers
-        with self.engine.connect() as conn:
+        # Ensure schema exists
+        with self.engine.begin() as conn:
             conn.execute(sqlalchemy.text("CREATE SCHEMA IF NOT EXISTS warehouse;"))
-            conn.commit()
 
         # Build the star schema
         print("Building Dimension Tables...")
@@ -54,8 +53,8 @@ class StarSchema:
         dim_date['weekday_name'] = dim_date['full_date'].dt.day_name()
         dim_date['is_weekend'] = dim_date['full_date'].dt.weekday >= 5
         
-        # Check existing dates
-        existing_dates = pd.read_sql("SELECT date_key FROM warehouse.dim_date", self.engine)
+        # Check existing dates using helper
+        existing_dates = self.get_existing_data("SELECT date_key FROM warehouse.dim_date")
         if not existing_dates.empty:
             dim_date = dim_date[~dim_date['date_key'].isin(existing_dates['date_key'])]
             
@@ -78,7 +77,7 @@ class StarSchema:
         unique_products['is_current'] = True
         
         # Check existing products (by category)
-        existing_products = pd.read_sql("SELECT category FROM warehouse.dim_product", self.engine)
+        existing_products = self.get_existing_data("SELECT category FROM warehouse.dim_product")
         if not existing_products.empty:
             unique_products = unique_products[~unique_products['category'].isin(existing_products['category'])]
             
@@ -120,7 +119,7 @@ class StarSchema:
         
         # Check existing customers
         # We can join on 'gender', 'age', 'spend_category' to filter
-        existing_customers = pd.read_sql("SELECT gender, age, spend_category FROM warehouse.dim_customer", self.engine)
+        existing_customers = self.get_existing_data("SELECT gender, age, spend_category FROM warehouse.dim_customer")
         
         if not existing_customers.empty:
             # Create a composite key for easier filtering
@@ -146,11 +145,15 @@ class StarSchema:
         
         # 2. Get Product Key
         # Fetch fresh keys from DB (inc. newly inserted ones)
-        dim_product = pd.read_sql("SELECT product_key, category FROM warehouse.dim_product", self.engine)
+        dim_product = self.get_existing_data("SELECT product_key, category FROM warehouse.dim_product")
+        if dim_product.empty:
+             print("Warning: dim_product is empty, fact merge will result in NaN keys")
         fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='category', how='left')
         
         # 3. Get Customer Key
-        dim_customer = pd.read_sql("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer", self.engine)
+        dim_customer = self.get_existing_data("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer")
+        if dim_customer.empty:
+             print("Warning: dim_customer is empty, fact merge will result in NaN keys")
         fact_merged = fact_merged.merge(dim_customer, left_on=['gender', 'customer_age', 'spend_category'], right_on=['gender', 'age', 'spend_category'], how='left')
         
         # 4. Prepare Fact Table
