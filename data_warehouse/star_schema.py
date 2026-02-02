@@ -29,13 +29,16 @@ class StarSchema:
         print("Building Fact Table...")
         self.build_fact_table()
 
-    def get_existing_data(self, query):
-        """Helper to read existing data, returning empty DF if table doesn't exist."""
+    def get_existing_data(self, query, columns):
+        """Helper to read existing data, returning empty DF with columns if table doesn't exist."""
         try:
-            return pd.read_sql(query, self.engine)
+            df = pd.read_sql(query, self.engine)
+            if df.empty:
+                return pd.DataFrame(columns=columns)
+            return df
         except Exception:
-            # Likely table doesn't exist yet
-            return pd.DataFrame()
+            # Table doesn't exist or other error - return empty DF with expected columns
+            return pd.DataFrame(columns=columns)
 
     def build_dimension_tables(self):
         # --- Dim Date ---
@@ -54,7 +57,7 @@ class StarSchema:
         dim_date['is_weekend'] = dim_date['full_date'].dt.weekday >= 5
         
         # Check existing dates using helper
-        existing_dates = self.get_existing_data("SELECT date_key FROM warehouse.dim_date")
+        existing_dates = self.get_existing_data("SELECT date_key FROM warehouse.dim_date", ['date_key'])
         if not existing_dates.empty:
             dim_date = dim_date[~dim_date['date_key'].isin(existing_dates['date_key'])]
             
@@ -77,7 +80,7 @@ class StarSchema:
         unique_products['is_current'] = True
         
         # Check existing products (by category)
-        existing_products = self.get_existing_data("SELECT category FROM warehouse.dim_product")
+        existing_products = self.get_existing_data("SELECT category FROM warehouse.dim_product", ['category'])
         if not existing_products.empty:
             unique_products = unique_products[~unique_products['category'].isin(existing_products['category'])]
             
@@ -119,7 +122,7 @@ class StarSchema:
         
         # Check existing customers
         # We can join on 'gender', 'age', 'spend_category' to filter
-        existing_customers = self.get_existing_data("SELECT gender, age, spend_category FROM warehouse.dim_customer")
+        existing_customers = self.get_existing_data("SELECT gender, age, spend_category FROM warehouse.dim_customer", ['gender', 'age', 'spend_category'])
         
         if not existing_customers.empty:
             # Create a composite key for easier filtering
@@ -145,13 +148,13 @@ class StarSchema:
         
         # 2. Get Product Key
         # Fetch fresh keys from DB (inc. newly inserted ones)
-        dim_product = self.get_existing_data("SELECT product_key, category FROM warehouse.dim_product")
+        dim_product = self.get_existing_data("SELECT product_key, category FROM warehouse.dim_product", ['product_key', 'category'])
         if dim_product.empty:
              print("Warning: dim_product is empty, fact merge will result in NaN keys")
         fact_merged = self.silver_data.merge(dim_product, left_on='product', right_on='category', how='left')
         
         # 3. Get Customer Key
-        dim_customer = self.get_existing_data("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer")
+        dim_customer = self.get_existing_data("SELECT customer_key, gender, age, spend_category FROM warehouse.dim_customer", ['customer_key', 'gender', 'age', 'spend_category'])
         if dim_customer.empty:
              print("Warning: dim_customer is empty, fact merge will result in NaN keys")
         fact_merged = fact_merged.merge(dim_customer, left_on=['gender', 'customer_age', 'spend_category'], right_on=['gender', 'age', 'spend_category'], how='left')
@@ -183,8 +186,8 @@ def run_star_schema_etl():
     db_user = os.getenv("POSTGRES_USER", "admin")
     db_password = os.getenv("POSTGRES_PASSWORD", "password123")
     
-    # NOTE: Assuming warehouse DB is same as clean DB for now unless specified otherwise in env
-    gold_db_name = os.getenv("POSTGRES_DB_CLEAN", "bi_warehouse_clean") # Was bi_warehouse_warehouse
+    # Use a dedicated variable for the target gold database
+    gold_db_name = os.getenv("POSTGRES_DB_GOLD", "bi_warehouse_warehouse")
     
     gold_db_url = f"postgresql://{db_user}:{db_password}@{gold_db_host}:{gold_db_port}/{gold_db_name}"
     engine_gold = create_engine(gold_db_url)
@@ -193,7 +196,12 @@ def run_star_schema_etl():
         # Load data
         print("Loading silver data...")
         silver_data_df = load_from_silver()
+        print(f"Extracted {len(silver_data_df)} rows from silver layer.")
         
+        if silver_data_df.empty:
+            print("Warning: Silver data is empty! Nothing to process.")
+            return
+
         # Initialize and run Star Schema build
         star_schema = StarSchema(engine_gold, silver_data_df)
         star_schema.build_star_schema()

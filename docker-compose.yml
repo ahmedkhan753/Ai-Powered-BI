@@ -96,6 +96,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_DB_CLEAN: ${POSTGRES_DB_CLEAN}
+      POSTGRES_DB_GOLD: ${POSTGRES_DB_GOLD}
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
