@@ -5,9 +5,9 @@ services:
     image: postgres:15-alpine
     container_name: bi-postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: bi_warehouse
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
@@ -26,11 +26,11 @@ services:
     image: postgres:15-alpine
     container_name: clean-warehouse-postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-      POSTGRES_DB: bi_warehouse_clean # default DB 
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB_CLEAN} # default DB
     ports:
-      - "5434:5432" # Host port 5434 → internal container port 5432
+      - "5434:5432"
     volumes:
       - clean_warehouse_data:/var/lib/postgresql/data
     healthcheck:
@@ -46,16 +46,19 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${RAW_DB_HOST}:${RAW_DB_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
-      AIRFLOW__WEBSERVER__SECRET_KEY: super_secret_key_change_in_production_123
-      PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
-      RAW_DB_HOST: postgres
-      RAW_DB_PORT: 5432
-      CLEAN_DB_HOST: clean-warehouse-postgres
-      CLEAN_DB_PORT: 5432
-      GOLD_DB_HOST: clean-warehouse-postgres
-      GOLD_DB_PORT: 5432
+      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW__WEBSERVER__SECRET_KEY}
+      PYTHONPATH: "${AIRFLOW_PROJ_DIR}:${PYTHONPATH}"
+      RAW_DB_HOST: ${RAW_DB_HOST}
+      RAW_DB_PORT: ${RAW_DB_PORT}
+      CLEAN_DB_HOST: ${CLEAN_DB_HOST}
+      CLEAN_DB_PORT: ${CLEAN_DB_PORT}
+      GOLD_DB_PORT: ${GOLD_DB_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB_CLEAN: ${POSTGRES_DB_CLEAN}
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
@@ -79,15 +82,18 @@ services:
       airflow-webserver:
         condition: service_healthy
     environment:
-      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://admin:password123@postgres:5432/bi_warehouse
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${RAW_DB_HOST}:${RAW_DB_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
-      PYTHONPATH: "/opt/airflow:${PYTHONPATH}"
-      RAW_DB_HOST: postgres
-      RAW_DB_PORT: 5432
-      CLEAN_DB_HOST: clean-warehouse-postgres
-      CLEAN_DB_PORT: 5432
-      GOLD_DB_HOST: clean-warehouse-postgres
-      GOLD_DB_PORT: 5432
+      PYTHONPATH: "${AIRFLOW_PROJ_DIR}:${PYTHONPATH}"
+      RAW_DB_HOST: ${RAW_DB_HOST}
+      RAW_DB_PORT: ${RAW_DB_PORT}
+      CLEAN_DB_HOST: ${CLEAN_DB_HOST}
+      CLEAN_DB_PORT: ${CLEAN_DB_PORT}
+      GOLD_DB_PORT: ${GOLD_DB_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB_CLEAN: ${POSTGRES_DB_CLEAN}
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
@@ -99,4 +105,4 @@ services:
 
 volumes:
   postgres_data:
-  clean_warehouse_data: # ← New volume for the clean/warehouse Postgres
+  clean_warehouse_data:

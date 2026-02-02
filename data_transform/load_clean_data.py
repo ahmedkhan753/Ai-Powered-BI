@@ -7,7 +7,11 @@ import os
 
 clean_db_host = os.getenv("CLEAN_DB_HOST", "localhost")
 clean_db_port = os.getenv("CLEAN_DB_PORT", "5434")
-clean_db_url = f"postgresql://admin:password123@{clean_db_host}:{clean_db_port}/bi_warehouse_clean"
+db_user = os.getenv("POSTGRES_USER", "admin")
+db_password = os.getenv("POSTGRES_PASSWORD", "password123")
+clean_db = os.getenv("POSTGRES_DB_CLEAN", "bi_warehouse_clean")
+
+clean_db_url = f"postgresql://{db_user}:{db_password}@{clean_db_host}:{clean_db_port}/{clean_db}"
 engine_clean = create_engine(clean_db_url)
 def extract_clean_data() -> pd.DataFrame:
     raw_data = raw_data_fetcher(query, engine)

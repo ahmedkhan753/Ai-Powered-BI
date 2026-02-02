@@ -5,7 +5,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import IntegrityError
 
 
-DATABASE_URL = "postgresql://admin:password123@postgres:5432/bi_warehouse" # Raw DB URL
+import os
+
+db_user = os.getenv("POSTGRES_USER", "admin")
+db_password = os.getenv("POSTGRES_PASSWORD", "password123")
+raw_host = os.getenv("RAW_DB_HOST", "postgres")
+raw_port = os.getenv("RAW_DB_PORT", "5432")
+raw_db = os.getenv("POSTGRES_DB", "bi_warehouse")
+
+DATABASE_URL = f"postgresql://{db_user}:{db_password}@{raw_host}:{raw_port}/{raw_db}" # Raw DB URL
 
 def load_raw_sales(df: pd.DataFrame) -> int:
     """

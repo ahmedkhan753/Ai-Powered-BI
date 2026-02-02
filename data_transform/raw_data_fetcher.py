@@ -6,7 +6,11 @@ from sqlalchemy.exc import IntegrityError
 
 db_host = os.getenv("RAW_DB_HOST", "localhost")
 db_port = os.getenv("RAW_DB_PORT", "5433")
-database_url = f"postgresql://admin:password123@{db_host}:{db_port}/bi_warehouse"
+db_user = os.getenv("POSTGRES_USER", "admin")
+db_password = os.getenv("POSTGRES_PASSWORD", "password123")
+db_name = os.getenv("POSTGRES_DB", "bi_warehouse")
+
+database_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
 engine = create_engine(database_url)
 query = "SELECT * FROM raw.sales_data;"
 

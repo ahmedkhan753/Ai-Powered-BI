@@ -164,7 +164,13 @@ def run_star_schema_etl():
     # Define database connection parameters
     gold_db_host = os.getenv("GOLD_DB_HOST", "localhost")
     gold_db_port = os.getenv("GOLD_DB_PORT", "5434")
-    gold_db_url = f"postgresql://admin:password123@{gold_db_host}:{gold_db_port}/bi_warehouse_warehouse"
+    db_user = os.getenv("POSTGRES_USER", "admin")
+    db_password = os.getenv("POSTGRES_PASSWORD", "password123")
+    
+    # NOTE: Assuming warehouse DB is same as clean DB for now unless specified otherwise in env
+    gold_db_name = os.getenv("POSTGRES_DB_CLEAN", "bi_warehouse_clean") # Was bi_warehouse_warehouse
+    
+    gold_db_url = f"postgresql://{db_user}:{db_password}@{gold_db_host}:{gold_db_port}/{gold_db_name}"
     engine_gold = create_engine(gold_db_url)
     
     try:

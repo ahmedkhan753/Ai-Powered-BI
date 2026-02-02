@@ -6,7 +6,15 @@ from extract import extract_data
 from validate import validate_data
 from load_raw import load_raw_sales
 
-DATABASE_URL = "postgresql://admin:password123@postgres:5432/bi_warehouse"
+import os
+
+db_user = os.getenv("POSTGRES_USER", "admin")
+db_password = os.getenv("POSTGRES_PASSWORD", "password123")
+raw_host = os.getenv("RAW_DB_HOST", "postgres")
+raw_port = os.getenv("RAW_DB_PORT", "5432")
+raw_db = os.getenv("POSTGRES_DB", "bi_warehouse")
+
+DATABASE_URL = f"postgresql://{db_user}:{db_password}@{raw_host}:{raw_port}/{raw_db}"
 def get_max_loaded_order_id() -> int:
     """Query DB for highest order_id already loaded. Return -1 if table empty."""
     engine = create_engine(DATABASE_URL)
