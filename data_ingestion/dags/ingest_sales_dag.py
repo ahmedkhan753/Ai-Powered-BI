@@ -18,8 +18,8 @@ default_args = {
 with DAG(
     'sales_ingestion_pipeline',
     default_args=default_args,
-    description='Incremental sales data ingestion every 5 minutes',
-    schedule_interval=timedelta(minutes=5),
+    description='Incremental sales data ingestion every 2 minutes',
+    schedule_interval=timedelta(minutes=2),
     start_date=datetime(2025, 12, 1),
     catchup=False,
     max_active_runs=1,

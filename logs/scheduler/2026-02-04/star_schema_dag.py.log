@@ -1933,3 +1933,80 @@
 [2026-02-04T14:32:14.844+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:32:14.843+0000] {dag.py:3089} INFO - Sync 1 DAGs
 [2026-02-04T14:32:14.894+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:32:14.894+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
 [2026-02-04T14:32:14.949+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.237 seconds
+[2026-02-04T14:36:05.725+0000] {processor.py:161} INFO - Started process (PID=26) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:05.727+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:36:05.733+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:05.733+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:05.781+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:05.911+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:05.911+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:36:05.940+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:05.939+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:36:06.016+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.304 seconds
+[2026-02-04T14:36:36.457+0000] {processor.py:161} INFO - Started process (PID=70) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:36.459+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:36:36.462+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:36.462+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:36.498+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:36:36.552+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:36.551+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:36:36.584+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:36:36.584+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:36:36.621+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.171 seconds
+[2026-02-04T14:37:06.826+0000] {processor.py:161} INFO - Started process (PID=83) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:06.835+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:37:06.842+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:06.841+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:06.889+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:06.933+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:06.933+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:37:06.955+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:06.955+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:37:07.032+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.214 seconds
+[2026-02-04T14:37:37.227+0000] {processor.py:161} INFO - Started process (PID=87) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:37.228+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:37:37.232+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:37.232+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:37.264+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:37:37.306+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:37.305+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:37:37.332+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:37:37.332+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:37:37.365+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.148 seconds
+[2026-02-04T14:38:07.629+0000] {processor.py:161} INFO - Started process (PID=91) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:07.632+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:38:07.638+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:07.637+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:07.680+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:07.752+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:07.751+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:38:07.797+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:07.797+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:38:07.847+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.226 seconds
+[2026-02-04T14:38:38.413+0000] {processor.py:161} INFO - Started process (PID=95) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:38.416+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:38:38.424+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:38.423+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:38.480+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:38:38.531+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:38.530+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:38:38.566+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:38:38.566+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:38:38.607+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.203 seconds
+[2026-02-04T14:39:08.722+0000] {processor.py:161} INFO - Started process (PID=99) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:08.723+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:39:08.728+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:08.726+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:08.773+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:08.823+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:08.823+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:39:08.858+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:08.858+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:39:08.940+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.226 seconds
+[2026-02-04T14:39:39.623+0000] {processor.py:161} INFO - Started process (PID=144) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:39.625+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:39:39.629+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:39.628+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:39.678+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:39:39.724+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:39.724+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:39:39.749+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:39:39.748+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:39:39.820+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.206 seconds
+[2026-02-04T14:40:09.937+0000] {processor.py:161} INFO - Started process (PID=176) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:09.939+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:40:09.941+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:09.941+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:09.980+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:10.054+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:10.054+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:40:10.088+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:10.088+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:40:10.129+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.202 seconds
+[2026-02-04T14:40:40.574+0000] {processor.py:161} INFO - Started process (PID=211) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:40.578+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:40:40.582+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:40.581+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:40.636+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:40:40.679+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:40.678+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:40:40.703+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:40:40.703+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:40:40.738+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.175 seconds
+[2026-02-04T14:41:11.160+0000] {processor.py:161} INFO - Started process (PID=215) to work on /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:41:11.162+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/star_schema_dag.py for tasks to queue
+[2026-02-04T14:41:11.165+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:41:11.164+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:41:11.203+0000] {processor.py:840} INFO - DAG(s) 'star_schema_pipeline' retrieved from /opt/airflow/dags/star_schema_dag.py
+[2026-02-04T14:41:11.242+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:41:11.242+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-02-04T14:41:11.265+0000] {logging_mixin.py:188} INFO - [2026-02-04T14:41:11.265+0000] {dag.py:3947} INFO - Setting next_dagrun for star_schema_pipeline to None, run_after=None
+[2026-02-04T14:41:11.303+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/star_schema_dag.py took 0.150 seconds
