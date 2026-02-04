@@ -1,6 +1,7 @@
 import sys
 sys.path.append('/opt/airflow/scripts')
 
+import time
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
@@ -30,12 +31,17 @@ with DAG(
         python_callable=ingest_sales_pipeline,
     )
 
+    wait_one_minute = PythonOperator(
+        task_id='wait_one_minute',
+        python_callable=lambda: time.sleep(60),
+    )
+
     trigger_silver = TriggerDagRunOperator(
         task_id='trigger_silver_cleaning',
         trigger_dag_id='sales_silver_cleaning_pipeline', 
         wait_for_completion=False,
     )
-    run_ingestion >> trigger_silver 
+    run_ingestion >> wait_one_minute >> trigger_silver 
 
   
     if __name__ == "__main__":

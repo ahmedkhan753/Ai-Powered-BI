@@ -1,5 +1,6 @@
 import sys
 import os
+import time
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -45,6 +46,11 @@ with DAG(
     run_cleaning = PythonOperator(
         task_id='run_silver_cleaning',
         python_callable=run_cleaning_wrapper, 
+    )
+
+    wait_one_minute = PythonOperator(
+        task_id='wait_one_minute',
+        python_callable=lambda: time.sleep(60),
     )
 
     trigger_star_schema = TriggerDagRunOperator(
