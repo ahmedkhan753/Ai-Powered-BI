@@ -47,6 +47,12 @@ def ingest_sales_pipeline():
         logging.info("No new rows to load — pipeline complete!")
         return
     
+    # Schema Validation To avoid pipeline failure due to data schema mismatch 
+    expected_columns = ['OrderID', 'Date', 'Gender', 'Age', 'Product', 'Quantity', 'Price', 'Total Amount']
+    if not all(col in df.columns for col in expected_columns):
+        logging.error("Data schema mismatch - expected columns not found.")
+        return -1 
+    
     logging.info(f"Found {len(new_df)} new rows (OrderID {new_df['OrderID'].min()} to {new_df['OrderID'].max()})")
     
     # 4. Validate and load

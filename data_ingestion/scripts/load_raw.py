@@ -21,8 +21,8 @@ def load_raw_sales(df: pd.DataFrame) -> int:
     """
     if df.empty:
         logging.info("No new data to load.")
-        return -1 
-
+        return -1
+    
     logging.info(f"Starting load of {len(df)} new rows")
 
     df_renamed = df.rename(columns={
