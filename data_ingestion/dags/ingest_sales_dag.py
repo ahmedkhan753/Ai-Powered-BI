@@ -13,6 +13,9 @@ default_args = {
     'depends_on_past': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=1),
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'email': ['ahmedk32410@gmail.com'],
 }
 
 with DAG(
@@ -44,10 +47,6 @@ with DAG(
     - sales
     """,
     tags=['bi', 'sales'],
-    email_on_failure=True,
-    email_on_retry=False,
-    email=['ahmedk32410@gmail.com'],
-    
 ) as dag:
 
     run_ingestion = PythonOperator(

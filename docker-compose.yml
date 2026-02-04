@@ -45,21 +45,11 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    env_file: .env
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${RAW_DB_HOST}:${RAW_DB_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
-      AIRFLOW__WEBSERVER__SECRET_KEY: ${AIRFLOW__WEBSERVER__SECRET_KEY}
       PYTHONPATH: "${AIRFLOW_PROJ_DIR}:${PYTHONPATH}"
-      RAW_DB_HOST: ${RAW_DB_HOST}
-      RAW_DB_PORT: ${RAW_DB_PORT}
-      CLEAN_DB_HOST: ${CLEAN_DB_HOST}
-      CLEAN_DB_PORT: ${CLEAN_DB_PORT}
-      GOLD_DB_HOST: ${GOLD_DB_HOST}
-      GOLD_DB_PORT: ${GOLD_DB_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_DB_CLEAN: ${POSTGRES_DB_CLEAN}
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
@@ -82,21 +72,11 @@ services:
     depends_on:
       airflow-webserver:
         condition: service_healthy
+    env_file: .env
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${RAW_DB_HOST}:${RAW_DB_PORT}/${POSTGRES_DB}
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
       PYTHONPATH: "${AIRFLOW_PROJ_DIR}:${PYTHONPATH}"
-      RAW_DB_HOST: ${RAW_DB_HOST}
-      RAW_DB_PORT: ${RAW_DB_PORT}
-      CLEAN_DB_HOST: ${CLEAN_DB_HOST}
-      CLEAN_DB_PORT: ${CLEAN_DB_PORT}
-      GOLD_DB_HOST: ${GOLD_DB_HOST}
-      GOLD_DB_PORT: ${GOLD_DB_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_DB_CLEAN: ${POSTGRES_DB_CLEAN}
-      POSTGRES_DB_GOLD: ${POSTGRES_DB_GOLD}
     volumes:
       - ./data_ingestion/dags:/opt/airflow/dags
       - ./data_ingestion/scripts:/opt/airflow/scripts
