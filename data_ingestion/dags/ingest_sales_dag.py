@@ -23,7 +23,31 @@ with DAG(
     start_date=datetime(2025, 12, 1),
     catchup=False,
     max_active_runs=1,
+    doc_md="""
+    ### Incremental Sales Data Ingestion
+    
+    This DAG performs incremental sales data ingestion every 2 minutes.
+    
+    **Pipeline Steps**:
+    1. Extracts the full dataset from the source file.
+    2. Filters new rows based on the current watermark (max loaded order_id).
+    3. Validates the data schema.
+    4. Loads the new rows into the raw sales table.
+    5. Triggers the silver cleaning pipeline.
+    
+    **Error Handling**:
+    - Logs errors and exits if data schema mismatch is detected.
+    - Logs warnings if no new rows are found.
+    
+    **Tags**:
+    - bi
+    - sales
+    """,
     tags=['bi', 'sales'],
+    email_on_failure=True,
+    email_on_retry=False,
+    email=['ahmedk32410@gmail.com'],
+    
 ) as dag:
 
     run_ingestion = PythonOperator(
