@@ -1,0 +1,17 @@
+[2026-02-04T10:46:24.703+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-02-04T10:46:24.733+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sales_ingestion_pipeline.trigger_silver_cleaning scheduled__2026-02-04T10:40:00+00:00 [queued]>
+[2026-02-04T10:46:24.741+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sales_ingestion_pipeline.trigger_silver_cleaning scheduled__2026-02-04T10:40:00+00:00 [queued]>
+[2026-02-04T10:46:24.741+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-02-04T10:46:24.752+0000] {taskinstance.py:2330} INFO - Executing <Task(TriggerDagRunOperator): trigger_silver_cleaning> on 2026-02-04 10:40:00+00:00
+[2026-02-04T10:46:24.759+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'sales_ingestion_pipeline', 'trigger_silver_cleaning', 'scheduled__2026-02-04T10:40:00+00:00', '--job-id', '744', '--raw', '--subdir', 'DAGS_FOLDER/ingest_sales_dag.py', '--cfg-path', '/tmp/tmpirdroinr']
+[2026-02-04T10:46:24.761+0000] {standard_task_runner.py:91} INFO - Job 744: Subtask trigger_silver_cleaning
+[2026-02-04T10:46:24.762+0000] {logging_mixin.py:188} WARNING - /home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=142) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-02-04T10:46:24.762+0000] {standard_task_runner.py:64} INFO - Started process 155 to run task
+[2026-02-04T10:46:24.838+0000] {task_command.py:426} INFO - Running <TaskInstance: sales_ingestion_pipeline.trigger_silver_cleaning scheduled__2026-02-04T10:40:00+00:00 [running]> on host a659fd7a4c49
+[2026-02-04T10:46:24.937+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='you' AIRFLOW_CTX_DAG_ID='sales_ingestion_pipeline' AIRFLOW_CTX_TASK_ID='trigger_silver_cleaning' AIRFLOW_CTX_EXECUTION_DATE='2026-02-04T10:40:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-04T10:40:00+00:00'
+[2026-02-04T10:46:24.938+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-02-04T10:46:26.243+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-02-04T10:46:26.257+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=sales_ingestion_pipeline, task_id=trigger_silver_cleaning, run_id=scheduled__2026-02-04T10:40:00+00:00, execution_date=20260204T104000, start_date=20260204T104624, end_date=20260204T104626
+[2026-02-04T10:46:26.304+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-02-04T10:46:26.330+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-02-04T10:46:26.333+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

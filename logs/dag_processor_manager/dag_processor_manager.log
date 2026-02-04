@@ -2539,3 +2539,325 @@ File Path                              PID    Runtime      # DAGs    # Errors  L
 /opt/airflow/dags/clean_sales_dag.py                            1           0  0.19s           2026-02-04T10:39:47
 /opt/airflow/dags/star_schema_dag.py                            1           0  0.10s           2026-02-04T10:39:31
 ================================================================================
+[2026-02-04T10:40:27.714+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.56s           2026-02-04T10:40:01
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:40:17
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.09s           2026-02-04T10:40:02
+================================================================================
+[2026-02-04T10:40:58.224+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-02-04T10:40:58.276+0000] {manager.py:740} INFO - There are 3 files in /opt/airflow/dags
+[2026-02-04T10:40:58.291+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.41s           2026-02-04T10:40:32
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.13s           2026-02-04T10:40:32
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.11s           2026-02-04T10:40:48
+================================================================================
+[2026-02-04T10:41:28.833+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.36s           2026-02-04T10:41:02
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.11s           2026-02-04T10:41:18
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.09s           2026-02-04T10:41:03
+================================================================================
+[2026-02-04T10:41:29.608+0000] {manager.py:452} INFO - Exiting gracefully upon receiving signal 15
+[2026-02-04T10:42:48.313+0000] {manager.py:470} INFO - Processing files using up to 2 processes at a time 
+[2026-02-04T10:42:48.314+0000] {manager.py:471} INFO - Process each file at most once every 30 seconds
+[2026-02-04T10:42:48.317+0000] {manager.py:472} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2026-02-04T10:42:48.318+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-02-04T10:42:48.369+0000] {manager.py:740} INFO - There are 3 files in /opt/airflow/dags
+[2026-02-04T10:42:48.519+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/clean_sales_dag.py      26  0.07s             0           0
+/opt/airflow/dags/ingest_sales_dag.py     27  0.05s             0           0
+/opt/airflow/dags/star_schema_dag.py                            0           0
+================================================================================
+[2026-02-04T10:43:19.055+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  1.18s           2026-02-04T10:42:49
+/opt/airflow/dags/clean_sales_dag.py      49  0.01s             1           0  0.16s           2026-02-04T10:42:48
+/opt/airflow/dags/star_schema_dag.py      50  0.00s             1           0  0.11s           2026-02-04T10:42:48
+================================================================================
+[2026-02-04T10:43:49.650+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.45s           2026-02-04T10:43:20
+/opt/airflow/dags/clean_sales_dag.py      53  0.02s             1           0  0.13s           2026-02-04T10:43:19
+/opt/airflow/dags/star_schema_dag.py      54  0.00s             1           0  0.11s           2026-02-04T10:43:19
+================================================================================
+[2026-02-04T10:44:20.137+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.49s           2026-02-04T10:43:51
+/opt/airflow/dags/clean_sales_dag.py      87  0.02s             1           0  0.13s           2026-02-04T10:43:49
+/opt/airflow/dags/star_schema_dag.py      88  0.00s             1           0  0.11s           2026-02-04T10:43:49
+================================================================================
+[2026-02-04T10:44:50.792+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.42s           2026-02-04T10:44:21
+/opt/airflow/dags/clean_sales_dag.py      91  0.02s             1           0  0.19s           2026-02-04T10:44:20
+/opt/airflow/dags/star_schema_dag.py      92  0.00s             1           0  0.17s           2026-02-04T10:44:20
+================================================================================
+[2026-02-04T10:45:21.403+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.44s           2026-02-04T10:44:52
+/opt/airflow/dags/clean_sales_dag.py     124  0.01s             1           0  0.21s           2026-02-04T10:44:50
+/opt/airflow/dags/star_schema_dag.py     125  0.00s             1           0  0.21s           2026-02-04T10:44:50
+================================================================================
+[2026-02-04T10:45:52.004+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.38s           2026-02-04T10:45:22
+/opt/airflow/dags/clean_sales_dag.py     128  0.02s             1           0  0.11s           2026-02-04T10:45:21
+/opt/airflow/dags/star_schema_dag.py     129  0.00s             1           0  0.10s           2026-02-04T10:45:21
+================================================================================
+[2026-02-04T10:46:22.522+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.42s           2026-02-04T10:45:53
+/opt/airflow/dags/clean_sales_dag.py     143  0.02s             1           0  0.14s           2026-02-04T10:45:52
+/opt/airflow/dags/star_schema_dag.py     144  0.00s             1           0  0.12s           2026-02-04T10:45:52
+================================================================================
+[2026-02-04T10:46:53.044+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.41s           2026-02-04T10:46:23
+/opt/airflow/dags/clean_sales_dag.py     176  0.02s             1           0  0.15s           2026-02-04T10:46:22
+/opt/airflow/dags/star_schema_dag.py     177  0.00s             1           0  0.13s           2026-02-04T10:46:22
+================================================================================
+[2026-02-04T10:47:23.074+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.62s           2026-02-04T10:46:54
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.14s           2026-02-04T10:46:53
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.11s           2026-02-04T10:46:53
+================================================================================
+[2026-02-04T10:47:48.511+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-02-04T10:47:48.593+0000] {manager.py:740} INFO - There are 3 files in /opt/airflow/dags
+[2026-02-04T10:47:53.117+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.48s           2026-02-04T10:47:25
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:47:23
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:47:23
+================================================================================
+[2026-02-04T10:48:23.714+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.35s           2026-02-04T10:47:55
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:47:54
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.11s           2026-02-04T10:47:54
+================================================================================
+[2026-02-04T10:48:54.237+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.40s           2026-02-04T10:48:26
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:48:24
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:48:24
+================================================================================
+[2026-02-04T10:49:24.771+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.38s           2026-02-04T10:48:56
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:48:55
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:48:55
+================================================================================
+[2026-02-04T10:49:55.302+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.37s           2026-02-04T10:49:27
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.13s           2026-02-04T10:49:25
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.13s           2026-02-04T10:49:25
+================================================================================
+[2026-02-04T10:50:25.859+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.49s           2026-02-04T10:49:57
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.14s           2026-02-04T10:49:56
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:49:56
+================================================================================
+[2026-02-04T10:50:56.371+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.35s           2026-02-04T10:50:28
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.14s           2026-02-04T10:50:27
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.13s           2026-02-04T10:50:27
+================================================================================
+[2026-02-04T10:51:26.924+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.44s           2026-02-04T10:50:58
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:50:57
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:50:57
+================================================================================
+[2026-02-04T10:51:57.480+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.37s           2026-02-04T10:51:29
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.14s           2026-02-04T10:51:28
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:51:28
+================================================================================
+[2026-02-04T10:52:28.081+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.37s           2026-02-04T10:51:59
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.19s           2026-02-04T10:51:58
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.18s           2026-02-04T10:51:58
+================================================================================
+[2026-02-04T10:52:48.771+0000] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-02-04T10:52:48.833+0000] {manager.py:740} INFO - There are 3 files in /opt/airflow/dags
+[2026-02-04T10:52:58.596+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.39s           2026-02-04T10:52:30
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.13s           2026-02-04T10:52:29
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.13s           2026-02-04T10:52:29
+================================================================================
+[2026-02-04T10:53:29.079+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.44s           2026-02-04T10:53:01
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:52:59
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:52:59
+================================================================================
+[2026-02-04T10:53:59.678+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.39s           2026-02-04T10:53:31
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.20s           2026-02-04T10:53:30
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.14s           2026-02-04T10:53:30
+================================================================================
+[2026-02-04T10:54:30.226+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.36s           2026-02-04T10:54:02
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.17s           2026-02-04T10:54:00
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.14s           2026-02-04T10:54:00
+================================================================================
+[2026-02-04T10:55:00.737+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.37s           2026-02-04T10:54:32
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.12s           2026-02-04T10:54:31
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.10s           2026-02-04T10:54:31
+================================================================================
+[2026-02-04T10:55:31.272+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.38s           2026-02-04T10:55:03
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.13s           2026-02-04T10:55:01
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.13s           2026-02-04T10:55:01
+================================================================================
+[2026-02-04T10:56:01.818+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.51s           2026-02-04T10:55:33
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.21s           2026-02-04T10:55:32
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.19s           2026-02-04T10:55:32
+================================================================================
+[2026-02-04T10:56:31.937+0000] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/ingest_sales_dag.py                           1           0  0.59s           2026-02-04T10:56:04
+/opt/airflow/dags/clean_sales_dag.py                            1           0  0.31s           2026-02-04T10:56:03
+/opt/airflow/dags/star_schema_dag.py                            1           0  0.12s           2026-02-04T10:56:02
+================================================================================

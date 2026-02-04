@@ -24,7 +24,7 @@ def extract_clean_data() -> pd.DataFrame:
     
     # 2. Extract only new data from raw layer
     incremental_query = f"SELECT * FROM raw.sales_data WHERE order_id > {max_id}"
-    raw_data = pd.read_sql(incremental_query, engine_clean.connect()) # using engine_clean to connect to the DB might be okay if they are in the same DB or accessible
+    raw_data = pd.read_sql(incremental_query, engine.connect())
     
     if raw_data.empty:
         return pd.DataFrame()

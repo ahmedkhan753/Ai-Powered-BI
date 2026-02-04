@@ -59,4 +59,4 @@ with DAG(
         wait_for_completion=False,
     )
 
-    run_cleaning >> trigger_star_schema
+    run_cleaning >> wait_one_minute >> trigger_star_schema
