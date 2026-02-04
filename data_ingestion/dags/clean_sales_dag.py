@@ -31,6 +31,7 @@ with DAG(
     schedule_interval=None, 
     start_date=datetime(2025, 12, 1),
     catchup=False,
+    max_active_runs=1,
     tags=['silver', 'cleaning'],
 ) as dag:
 

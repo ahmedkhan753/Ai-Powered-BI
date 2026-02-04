@@ -31,6 +31,7 @@ with DAG(
     schedule_interval=None, # Triggered by clean_sales_dag
     start_date=datetime(2025, 12, 1),
     catchup=False,
+    max_active_runs=1,
     tags=['gold', 'star_schema'],
 ) as dag:
 

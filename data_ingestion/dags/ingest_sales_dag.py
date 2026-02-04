@@ -22,6 +22,7 @@ with DAG(
     schedule_interval=timedelta(minutes=5),
     start_date=datetime(2025, 12, 1),
     catchup=False,
+    max_active_runs=1,
     tags=['bi', 'sales'],
 ) as dag:
 
