@@ -50,6 +50,7 @@ class CleanSales:
         df['spend_category'] = np.where(
         df['sales_amount'] > median_spent,'A','B'
         )
+        df['ingestion_timestamp'] = pd.Timestamp.now()
         return df
     
 

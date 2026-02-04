@@ -162,22 +162,24 @@ class StarSchema:
         # 4. Prepare Fact Table
         
         fact_sales = pd.DataFrame()
-        # Generate Integer Order ID
-        # Since we don't have real order IDs, we'll use a sequence starting from 1000
-        fact_sales['order_id'] = range(1000, 1000 + len(fact_merged))
+        # Use order_id from the source data (Silver layer)
+        fact_sales['order_id'] = fact_merged['order_id']
         fact_sales['date_key'] = fact_merged['date_key']
         fact_sales['customer_key'] = fact_merged['customer_key']
         fact_sales['product_key'] = fact_merged['product_key']
         fact_sales['quantity'] = fact_merged['quantity']
         fact_sales['price'] = fact_merged['price']
         fact_sales['sales_amount'] = fact_merged['sales_amount']
-        fact_sales['ingestion_timestamp'] = datetime.datetime.now()
+        # Use the ingestion_timestamp from the silver layer to maintain consistency
+        fact_sales['ingestion_timestamp'] = fact_merged['ingestion_timestamp']
         
         # sales_key is likely an auto-increment PK in the DB.
         
-        fact_sales.to_sql('fact_sales', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
-
-
+        if not fact_sales.empty:
+            print(f"Inserting {len(fact_sales)} new rows into fact_sales")
+            fact_sales.to_sql('fact_sales', self.engine, schema='warehouse', if_exists='append', index=False, method='multi')
+        else:
+            print("No new facts to add.")
 
 def run_star_schema_etl():
     # Define database connection parameters
@@ -193,19 +195,28 @@ def run_star_schema_etl():
     engine_gold = create_engine(gold_db_url)
     
     try:
-        # Load data
-        print("Loading silver data...")
-        silver_data_df = load_from_silver()
-        print(f"Extracted {len(silver_data_df)} rows from silver layer.")
+        # 1. Get the last ingestion time from gold layer
+        last_ingestion_time = None
+        try:
+            with engine_gold.connect() as conn:
+                result = conn.execute(sqlalchemy.text("SELECT MAX(ingestion_timestamp) FROM warehouse.fact_sales"))
+                last_ingestion_time = result.scalar()
+        except Exception as e:
+            print(f"Could not fetch last_ingestion_time (might be first run): {e}")
+
+        # 2. Load data from silver layer incrementally
+        print(f"Loading silver data after {last_ingestion_time}...")
+        silver_data_df = load_from_silver(last_ingestion_time)
+        print(f"Extracted {len(silver_data_df)} new rows from silver layer.")
         
         if silver_data_df.empty:
-            print("Warning: Silver data is empty! Nothing to process.")
+            print("No new data to process.")
             return
 
-        # Initialize and run Star Schema build
+        # 3. Initialize and run Star Schema build
         star_schema = StarSchema(engine_gold, silver_data_df)
         star_schema.build_star_schema()
-        print("Star schema built successfully!")
+        print("Star schema updated successfully!")
     finally:
         # Close connection
         engine_gold.dispose()

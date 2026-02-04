@@ -17,10 +17,13 @@ clean_db_url = f"postgresql://{db_user}:{db_password}@{clean_db_host}:{clean_db_
 engine_clean = create_engine(clean_db_url)
 
 # 5. Define the function to load data from the silver layer
-def load_from_silver():
+def load_from_silver(last_ingestion_time=None):
     """Load data from the silver layer (clean schema) into a DataFrame."""
-    # Use the clean schema explicitly if needed, although read_sql handles the query
-    clean_data = pd.read_sql("SELECT * FROM clean.clean_sales_data", engine_clean)
+    query = "SELECT * FROM clean.clean_sales_data"
+    if last_ingestion_time:
+        query += f" WHERE ingestion_timestamp > '{last_ingestion_time}'"
+    
+    clean_data = pd.read_sql(query, engine_clean)
     return clean_data
 
 if __name__ == "__main__":
