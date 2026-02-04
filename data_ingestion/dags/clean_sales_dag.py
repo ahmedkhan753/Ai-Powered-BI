@@ -1,6 +1,5 @@
 import sys
 import os
-import time
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -11,14 +10,6 @@ def run_cleaning_wrapper():
     import os
     import logging
     
-    # Debugging: Print current path and directories in /opt/airflow
-    logging.info(f"Current sys.path: {sys.path}")
-    try:
-        logging.info(f"Contents of /opt/airflow: {os.listdir('/opt/airflow')}")
-        logging.info(f"Contents of /opt/airflow/data_transform: {os.listdir('/opt/airflow/data_transform')}")
-    except Exception as e:
-        logging.warning(f"Could not list directories: {e}")
-
     # Ensure root is in path
     root_dir = '/opt/airflow'
     if root_dir not in sys.path:
@@ -48,15 +39,10 @@ with DAG(
         python_callable=run_cleaning_wrapper, 
     )
 
-    wait_one_minute = PythonOperator(
-        task_id='wait_one_minute',
-        python_callable=lambda: time.sleep(60),
-    )
-
     trigger_star_schema = TriggerDagRunOperator(
         task_id='trigger_star_schema_population',
         trigger_dag_id='star_schema_pipeline', 
         wait_for_completion=False,
     )
 
-    run_cleaning >> wait_one_minute >> trigger_star_schema
+    run_cleaning >> trigger_star_schema
