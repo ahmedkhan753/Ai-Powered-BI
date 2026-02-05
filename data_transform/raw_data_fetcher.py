@@ -14,10 +14,12 @@ engine = create_engine(database_url)
 
 query = "SELECT * FROM raw.sales_data;"
 
+
 def raw_data_fetcher(sql_query, engine) -> pd.DataFrame:
     df = pd.read_sql(sql_query, engine)
     logging.info(f"Fetched {len(df)} records from raw.sales_data")
     return df
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
