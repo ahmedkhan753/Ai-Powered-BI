@@ -62,7 +62,7 @@ def ingest_sales_pipeline():
         "Price",
         "Total Amount",
     ]
-    if not all(col in df.columns for col in expected_columns):
+    if not all(col in new_df.columns for col in expected_columns):
         logging.error("Data schema mismatch - expected columns not found.")
         return -1
 
