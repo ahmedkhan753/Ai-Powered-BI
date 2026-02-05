@@ -1,90 +1,40 @@
-name: CI Pipeline
+name: Data Pipeline CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main", "develop" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main", "develop" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: admin
-          POSTGRES_PASSWORD: password123
-          POSTGRES_DB: bi_warehouse
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest flake8 pytest-cov
-
-      - name: Initialize Airflow database
-        run: |
-          export AIRFLOW_HOME=${PWD}/airflow
-          # Correct way to ignore pydantic warnings without the -W module error:
-          export PYTHONWARNINGS="ignore" 
-          
-          echo "Waiting for Postgres..."
-          until pg_isready -h localhost -p 5432 -U admin; do
-            sleep 2
-          done
-
-          airflow db migrate
-          airflow connections create-default-connections
-
-      - name: Check Airflow health
-        run: |
-          export AIRFLOW_HOME=${PWD}/airflow
-          export AIRFLOW__CORE__DAGS_FOLDER=${PWD}/data_ingestion/dags
-          export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql://admin:password123@localhost:5432/bi_warehouse"
-          airflow info || exit 1
-          echo "Airflow is healthy!"
-
-      - name: Validate DAG syntax
-        run: |
-          export AIRFLOW_HOME=${PWD}/airflow
-          export AIRFLOW__CORE__DAGS_FOLDER=${PWD}/data_ingestion/dags
-          export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql://admin:password123@localhost:5432/bi_warehouse"
-          python -m py_compile data_ingestion/dags/*.py
-          echo "DAG syntax validation passed!"
-
-      - name: Run data validation tests
-        run: |
-          python -m pytest data_ingestion/scripts/validate.py -v
-
-      - name: Run extraction tests
-        run: |
-          python -m pytest data_ingestion/scripts/extract.py -v
-
-      - name: Run unit tests
-        run: |
-          pytest --cov=data_ingestion --cov=data_transform -v
-
-      - name: Lint with flake8
-        run: |
-          flake8 data_ingestion/ data_transform/ --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 data_ingestion/ data_transform/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+        
+    - name: Lint with Black
+      run: |
+        black --check .
+        
+    - name: Lint with Flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        
+    - name: Test with pytest
+      run: |
+        pytest

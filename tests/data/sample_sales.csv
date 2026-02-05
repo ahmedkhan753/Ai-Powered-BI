@@ -1,0 +1,4 @@
+OrderID,Date,Gender,Age,Product,Quantity,Price,Total Amount
+1001,2024-01-01,Male,30,Widget A,2,10.0,20.0
+1002,2024-01-02,Female,25,Widget B,1,15.0,15.0
+1003,2024-01-03,Male,35,Widget C,3,5.0,15.0
