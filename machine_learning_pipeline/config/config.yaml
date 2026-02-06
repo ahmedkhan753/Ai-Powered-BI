@@ -1,0 +1,17 @@
+paths:
+  raw_data: "data/raw.csv"
+  processed_data: "data/processed.csv"
+  train_data: "data/train.csv"
+  test_data: "data/test.csv"
+  model_path: "models/model.pkl"
+  preprocessor_path: "models/preprocessor.pkl"
+  logs: "logs/"
+
+database:
+  connection_string: "postgresql://user:password@localhost:5432/bi_db"
+  query: "SELECT * FROM gold_sales_data"
+
+model:
+  n_estimators: 100
+  random_state: 42
+  target_column: "price"
