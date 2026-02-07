@@ -38,7 +38,6 @@ class StarSchema:
                 return pd.DataFrame(columns=columns)
             return df
         except Exception:
-            # Table doesn't exist or other error - return empty DF with expected columns
             return pd.DataFrame(columns=columns)
 
     def build_dimension_tables(self):
@@ -98,8 +97,6 @@ class StarSchema:
                 ~unique_products["category"].isin(existing_products["category"])
             ]
 
-        # We rely on DB SERIAL for product_key, so we don't generate it here.
-
         if not unique_products.empty:
             print(f"Inserting {len(unique_products)} new rows into dim_product")
             unique_products.to_sql(
@@ -116,7 +113,6 @@ class StarSchema:
         # --- Dim Customer ---
         print("Building dim_customer...")
         # Get unique customers
-        # Based on ERD: customer_key, gender, age, age_group, spend_category, start_date, end_date, is_current
         # Source (Silver): gender, customer_age, spend_category.
         customer_cols = ["gender", "customer_age", "spend_category"]
         dim_customer = self.silver_data[customer_cols].drop_duplicates()
