@@ -21,7 +21,8 @@ def fetch_data(config):
     """
     try:
         logger.info("Fetching data from Gold Layer...")
-        df = pd.read_sql(config['database']['query'], engine_gold)
+        query = "SELECT * FROM warehouse.fact_sales;"
+        df = pd.read_sql(query, engine_gold)
         return df
         
     except Exception as e:
