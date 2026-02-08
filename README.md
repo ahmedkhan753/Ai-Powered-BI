@@ -64,6 +64,18 @@ AI-Powered-BI/
     -   Raw/Airflow Metadata: `5433`
     -   Clean/Warehouse: `5434`
 
+## Alerting and Notifications
+
+The platform includes an automated alerting system to notify administrators if a pipeline fails.
+
+### Email Alerts (Gmail)
+The system is configured to send real-time email notifications upon task failure. This ensures that any breaks in the Bronze, Silver, or Gold layers are addressed immediately.
+
+- **Configuration**: SMTP settings are managed in the root `.env` file under the `AIRFLOW__SMTP__` variables.
+- **Recipients**: The recipient email address is defined within each DAG's `default_args` (e.g., `ahmedk32410@gmail.com`).
+
+To update the notification recipient, modify the `email` field in the relevant DAG file located in `data_ingestion/dags/`.
+
 ## Component Details
 
 ### Data Ingestion
