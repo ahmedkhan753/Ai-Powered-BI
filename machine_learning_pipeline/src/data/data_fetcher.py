@@ -1,8 +1,6 @@
 import sys
 import os
 import pandas as pd
-from src.utils.logger import get_logger
-from sqlalchemy import create_engine
 
 # Add the project root to sys.path to allow importing from src
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -10,6 +8,9 @@ project_root = os.path.abspath(os.path.join(current_dir, "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+from src.utils.logger import get_logger
+from sqlalchemy import create_engine
+from sqlalchemy.exc import OperationalError
 
 
 logger = get_logger(__name__)
@@ -34,9 +35,24 @@ def fetch_data(config):
         df = pd.read_sql(query, engine_gold)
         return df
         
-    except Exception as e:
-        logger.error(f"Error fetching data: {e}")
-        raise e
+    except OperationalError as e:
+        logger.warning(f"Failed to connect to primary database: {e}")
+        logger.info("Attempting to connect to fallback database (localhost:5434)...")
+        
+        # Fallback connection details
+        fallback_db_host = "localhost"
+        fallback_db_port = "5434"
+        
+        try:
+            fallback_db_url = f"postgresql://{db_user}:{db_password}@{fallback_db_host}:{fallback_db_port}/{gold_db}"
+            engine_fallback = create_engine(fallback_db_url)
+            
+            df = pd.read_sql(query, engine_fallback)
+            logger.info("Successfully fetched data from fallback database.")
+            return df
+        except Exception as fallback_error:
+            logger.error(f"Failed to connect to fallback database: {fallback_error}")
+            raise e
 
 if __name__ == "__main__":
     config = {
