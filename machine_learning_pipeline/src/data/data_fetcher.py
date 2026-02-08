@@ -1,5 +1,8 @@
 import sys
 import os
+import pandas as pd
+from src.utils.logger import get_logger
+from sqlalchemy import create_engine
 
 # Add the project root to sys.path to allow importing from src
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -7,10 +10,7 @@ project_root = os.path.abspath(os.path.join(current_dir, "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-import pandas as pd
-from src.utils.logger import get_logger
-import os
-from sqlalchemy import create_engine
+
 
 logger = get_logger(__name__)
  # Define database connection parameters
