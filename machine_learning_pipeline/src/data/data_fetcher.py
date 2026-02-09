@@ -37,7 +37,21 @@ def fetch_data(config):
         return df
         
     except Exception as e:
-        logger.warning(f"Failed to connect to primary and fallback database: {e}")
+        logger.warning(f"Connection failed to {gold_db_host}:{gold_db_port}. Error: {e}")
+        
+        # If we failed to connect to 'clean-warehouse-postgres' but we are on the host, 
+        # we might want to try localhost:5434 as a second automatic attempt before mock data.
+        if gold_db_host == "clean-warehouse-postgres":
+            try:
+                logger.info("Host 'clean-warehouse-postgres' not found. Attempting connection via localhost:5434...")
+                fallback_url = f"postgresql://{db_user}:{db_password}@localhost:5434/{gold_db}"
+                engine_local = create_engine(fallback_url)
+                df = pd.read_sql(query, engine_local)
+                logger.info("Successfully connected to database via localhost:5434.")
+                return df
+            except Exception as local_e:
+                logger.warning(f"Connection to localhost:5434 also failed: {local_e}")
+
         logger.info("Generating mock data for verification...")
         
         # Generate 1000 rows of mock data
