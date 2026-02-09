@@ -94,15 +94,30 @@ services:
     depends_on:
       clean-warehouse-postgres:
         condition: service_healthy
+      redis:
+        condition: service_started
     env_file: .env
     environment:
       GOLD_DB_HOST: clean-warehouse-postgres
       GOLD_DB_PORT: 5432
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       PYTHONPATH: "/app"
     volumes:
       - ./machine_learning_pipeline/logs:/app/logs
       - ./machine_learning_pipeline/models:/app/models
       - ./machine_learning_pipeline/data:/app/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: bi-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
