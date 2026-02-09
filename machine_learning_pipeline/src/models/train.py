@@ -6,12 +6,12 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-def train_model(X_train, X_test, y_train, y_test, config):
+def train_model(X_train, X_test, y_train, y_test, config, model_save_path):
     """
     Trains the model and evaluates it.
     """
     try:
-        logger.info("Starting model training...")
+        logger.info(f"Starting model training for {os.path.basename(model_save_path)}...")
         
         model = RandomForestRegressor(
             n_estimators=config['model']['n_estimators'],
@@ -25,14 +25,14 @@ def train_model(X_train, X_test, y_train, y_test, config):
         # Evaluate
         predictions = model.predict(X_test)
         score = r2_score(y_test, predictions)
-        logger.info(f"Model R2 Score: {score}")
+        logger.info(f"Model R2 Score for {os.path.basename(model_save_path)}: {score}")
         
         # Save Model
-        os.makedirs(os.path.dirname(config['paths']['model_path']), exist_ok=True)
-        with open(config['paths']['model_path'], 'wb') as f:
+        os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
+        with open(model_save_path, 'wb') as f:
             pickle.dump(model, f)
             
-        logger.info(f"Model saved to {config['paths']['model_path']}")
+        logger.info(f"Model saved to {model_save_path}")
         
         return score
         

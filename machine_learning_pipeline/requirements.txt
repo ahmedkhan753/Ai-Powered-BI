@@ -1,3 +1,5 @@
 pandas
 scikit-learn
 pyyaml
+psycopg2-binary
+sqlalchemy

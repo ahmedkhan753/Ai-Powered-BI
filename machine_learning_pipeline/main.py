@@ -21,14 +21,21 @@ def main():
         # 2. Fetch Data
         df = fetch_data(config)
         
-        # 3. Preprocess
-        X_train, X_test, y_train, y_test = preprocess_data(df, config)
+        # 3. Preprocess (Returns data for both models)
+        overall_data, product_data = preprocess_data(df, config)
         
-        # 4. Train & Evaluate
-        score = train_model(X_train, X_test, y_train, y_test, config)
+        # 4. Train & Evaluate Overall Sales Model
+        score_o = train_model(*overall_data, config, config['paths']['overall_model_path'])
+        
+        # 5. Train & Evaluate Product Sales Model
+        score_p = train_model(*product_data, config, config['paths']['product_model_path'])
         
         logger.info("Pipeline Execution Completed Successfully")
-        print(f"Pipeline Finished. Final Model Score (R2): {score}")
+        print("-" * 30)
+        print(f"Pipeline Finished.")
+        print(f"Overall Sales Model R2 Score: {score_o:.4f}")
+        print(f"Product Sales Model R2 Score: {score_p:.4f}")
+        print("-" * 30)
         
     except Exception as e:
         logger.error(f"Pipeline Failed: {e}")

@@ -3,15 +3,30 @@ paths:
   processed_data: "data/processed.csv"
   train_data: "data/train.csv"
   test_data: "data/test.csv"
-  model_path: "models/model.pkl"
+  overall_model_path: "models/overall_sales_model.pkl"
+  product_model_path: "models/product_sales_model.pkl"
   preprocessor_path: "models/preprocessor.pkl"
   logs: "logs/"
 
 database:
   connection_string: "postgresql://user:password@localhost:5432/bi_db"
-  query: "SELECT * FROM gold_sales_data"
+  query: |
+    SELECT 
+        f.sales_amount, 
+        f.quantity,
+        f.product_key,
+        p.category as product_category,
+        d.year,
+        d.month,
+        d.day,
+        d.quarter,
+        d.weekday_name,
+        d.is_weekend
+    FROM warehouse.fact_sales f
+    JOIN warehouse.dim_date d ON f.date_key = d.date_key
+    JOIN warehouse.dim_product p ON f.product_key = p.product_key
 
 model:
   n_estimators: 100
   random_state: 42
-  target_column: "price"
+  target_column: "sales_amount"
