@@ -1,5 +1,6 @@
 import yaml
 import sys
+import os
 from src.data.data_fetcher import fetch_data
 from src.preprocess.preprocessor import preprocess_data
 from src.models.train import train_model
@@ -7,7 +8,11 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-def load_config(config_path="config/config.yaml"):
+def load_config(config_path=None):
+    if config_path is None:
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        config_path = os.path.join(current_dir, "config", "config.yaml")
+    
     with open(config_path, "r") as f:
         return yaml.safe_load(f)
 
