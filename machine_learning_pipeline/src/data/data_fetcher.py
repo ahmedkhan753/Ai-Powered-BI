@@ -34,6 +34,10 @@ def fetch_data(config):
         logger.info("Fetching data from Gold Layer...")
         query = config['database']['query']
         df = pd.read_sql(query, engine_gold)
+        logger.info(f"Successfully fetched {len(df)} rows.")
+        if not df.empty:
+            logger.info("Data Sample:\n" + str(df.head()))
+            logger.info("Data Stats:\n" + str(df.describe()))
         return df
         
     except Exception as e:
