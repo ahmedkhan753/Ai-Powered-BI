@@ -87,6 +87,14 @@ The `data_transform/` and `data_warehouse/` modules handle the movement of data 
 ### Machine Learning Pipeline
 The `machine_learning_pipeline/` fetches data from the Gold layer via a robust data fetcher. It includes a fallback mechanism for local development, allowing it to connect to either the internal Docker network or a local host mapping.
 
+#### Real-Time Inference API
+The platform now exposes a Real-Time Inference API via `ml-api` service running on port `8000`.
+- **Health Check**: `GET /health`
+- **Prediction**: `POST /predict`
+    - Payload: JSON object with sales features.
+    - Response: JSON object with `overall_sales_prediction` and `product_sales_prediction`.
+
 ## Monitoring
+
 
 The entire pipeline is monitored through the Airflow UI. Automated health checks ensure that database services are ready before processing begins. Logs for each step are captured in the project's `logs/` directory for troubleshooting.
