@@ -25,6 +25,3 @@ CMD ["python", "main.py"]
 EXPOSE 8000
 
 
-# Expose port for API
-EXPOSE 8000
-
