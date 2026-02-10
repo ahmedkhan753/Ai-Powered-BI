@@ -19,7 +19,7 @@ services:
       retries: 5
 
   # ────────────────────────────────────────────────────────────────
-  # NEW: Separate container for clean + warehouse layer
+  # Separate container for clean + warehouse layer
   # Exposed on host port 5434 to avoid conflict with 5433
   # ────────────────────────────────────────────────────────────────
   clean-warehouse-postgres:
