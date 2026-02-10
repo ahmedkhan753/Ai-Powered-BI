@@ -73,6 +73,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="ML Inference API", version="1.0.0", lifespan=lifespan)
 
+@app.get("/health")
+def health_check():
+    status = "healthy"
+    if not models["overall"] or not models["product"] or not models["preprocessor"]:
+        status = "degraded"
+    return {"status": status, "models_loaded": {k: v is not None for k, v in models.items()}}
+
+
 
 
 
