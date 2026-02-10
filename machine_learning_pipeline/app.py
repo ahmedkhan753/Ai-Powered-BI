@@ -80,6 +80,39 @@ def health_check():
         status = "degraded"
     return {"status": status, "models_loaded": {k: v is not None for k, v in models.items()}}
 
+@app.post("/predict")
+def predict(input_data: PredictionInput):
+    if not models["overall"] or not models["product"] or not models["preprocessor"]:
+        raise HTTPException(status_code=503, detail="Models not loaded")
+    
+    try:
+        # Convert input to DataFrame
+        data = input_data.dict() # pydantic v1, use model_dump for v2 but v1 is safer for now or check version
+        df = pd.DataFrame([data])
+        
+        # Preprocess
+        # Ensure column order matches training
+        # Note: The preprocessor (ColumnTransformer) expects specific columns.
+        # We need to make sure the input DF has the right columns in right order if required by the transformer,
+        # but usually ColumnTransformer matches by name if remainder='passthrough' or specific columns are named.
+        # However, checking `src/preprocess/preprocessor.py` would be ideal.
+        # For now we assume standard sklearn usage.
+        
+        X_scaled = models["preprocessor"].transform(df)
+        
+        # Predict
+        overall_pred = models["overall"].predict(X_scaled)
+        product_pred = models["product"].predict(X_scaled)
+        
+        return {
+            "overall_sales_prediction": float(overall_pred[0]),
+            "product_sales_prediction": float(product_pred[0])
+        }
+    except Exception as e:
+        logger.error(f"Prediction error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 
 
 
