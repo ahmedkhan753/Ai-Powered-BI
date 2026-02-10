@@ -112,6 +112,11 @@ services:
     command: uvicorn app:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - ./machine_learning_pipeline/models:/app/models
+      - ./machine_learning_pipeline/logs:/app/logs
 
   redis:
     image: redis:7-alpine
