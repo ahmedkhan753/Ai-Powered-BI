@@ -104,6 +104,15 @@ services:
       - ./machine_learning_pipeline/models:/app/models
       - ./machine_learning_pipeline/data:/app/data
 
+  ml-api:
+    build:
+      context: ./machine_learning_pipeline
+      dockerfile: Dockerfile
+    container_name: ml-api
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+
   redis:
     image: redis:7-alpine
     container_name: bi-redis
