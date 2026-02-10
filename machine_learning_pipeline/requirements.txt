@@ -4,3 +4,9 @@ pyyaml
 psycopg2-binary
 sqlalchemy
 redis
+fastapi
+uvicorn
+pydantic
+
+
+

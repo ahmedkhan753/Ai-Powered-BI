@@ -18,10 +18,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # ────────────────────────────────────────────────────────────────
-  # Separate container for clean + warehouse layer
-  # Exposed on host port 5434 to avoid conflict with 5433
-  # ────────────────────────────────────────────────────────────────
   clean-warehouse-postgres:
     image: postgres:15-alpine
     container_name: clean-warehouse-postgres
