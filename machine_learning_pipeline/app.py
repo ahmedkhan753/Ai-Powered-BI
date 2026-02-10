@@ -34,15 +34,42 @@ class PredictionInput(BaseModel):
     weekday_name: str
     is_weekend: bool
 
+    is_weekend: bool
+
+def load_models():
+    """Load models from disk into global dictionary."""
+    try:
+        # Paths (hardcoded for now, ideally from config)
+        base_path = "models"
+        overall_path = os.path.join(base_path, "overall_sales_model.pkl")
+        product_path = os.path.join(base_path, "product_sales_model.pkl")
+        preprocessor_path = os.path.join(base_path, "preprocessor.pkl")
+
+        if os.path.exists(overall_path):
+            with open(overall_path, "rb") as f:
+                models["overall"] = pickle.load(f)
+        
+        if os.path.exists(product_path):
+            with open(product_path, "rb") as f:
+                models["product"] = pickle.load(f)
+                
+        if os.path.exists(preprocessor_path):
+            with open(preprocessor_path, "rb") as f:
+                models["preprocessor"] = pickle.load(f)
+                
+        logger.info("Models loaded.")
+    except Exception as e:
+        logger.error(f"Error loading models: {e}")
+        # Don't crash, just log. Health check will reveal issues.
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Load models
-    models["overall"] = "loaded" # Placeholder
-    models["product"] = "loaded" # Placeholder
-    logger.info("Models loaded successfully")
+    load_models()
     yield
     # Clean up
     models.clear()
+
 
 app = FastAPI(title="ML Inference API", version="1.0.0", lifespan=lifespan)
 
