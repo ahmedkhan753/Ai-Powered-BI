@@ -20,3 +20,11 @@ ENV PYTHONPATH="/app"
 
 # Command to run the pipeline
 CMD ["python", "main.py"]
+
+# Expose port for API
+EXPOSE 8000
+
+
+# Expose port for API
+EXPOSE 8000
+
