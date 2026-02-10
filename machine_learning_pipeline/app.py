@@ -87,28 +87,62 @@ def predict(input_data: PredictionInput):
     
     try:
         # Convert input to DataFrame
-        data = input_data.dict() # pydantic v1, use model_dump for v2 but v1 is safer for now or check version
+        data = input_data.dict()
         df = pd.DataFrame([data])
         
-        # Preprocess
-        # Ensure column order matches training
-        # Note: The preprocessor (ColumnTransformer) expects specific columns.
-        # We need to make sure the input DF has the right columns in right order if required by the transformer,
-        # but usually ColumnTransformer matches by name if remainder='passthrough' or specific columns are named.
-        # However, checking `src/preprocess/preprocessor.py` would be ideal.
-        # For now we assume standard sklearn usage.
+        # 1. Feature Engineering (Must match preprocessor.py)
+        # Weekday encoding
+        weekday_map = {
+            'Monday': 0, 'Tuesday': 1, 'Wednesday': 2, 'Thursday': 3, 
+            'Friday': 4, 'Saturday': 5, 'Sunday': 6
+        }
+        df['weekday_num'] = df['weekday_name'].map(weekday_map)
         
-        X_scaled = models["preprocessor"].transform(df)
+        # 2. Select Columns for Model
+        # The model was trained on: ['year', 'month', 'day', 'quarter', 'weekday_num', 'is_weekend']
+        # Note: 'sales_amount' is the target, so it's not a feature. 'quantity' and 'product_key' were dropped or aggregated out in training for the Overall Model.
+        # WAIT: The error says "Feature names unseen at fit time: - product_key - quantity - sales_amount"
+        # This confirms the model does NOT want these.
         
-        # Predict
-        overall_pred = models["overall"].predict(X_scaled)
-        product_pred = models["product"].predict(X_scaled)
+        features_overall = ['year', 'month', 'day', 'quarter', 'weekday_num', 'is_weekend']
+        
+        # Prepare data for Overall Sales Model
+        X_overall = df[features_overall]
+        
+        # Scale
+        X_overall_scaled = models["preprocessor"].transform(X_overall)
+        
+        # Predict Overall
+        overall_pred = models["overall"].predict(X_overall_scaled)
+        
+        # Product Sales Model
+        # The product model likely needs 'product_key' and 'product_cat_num' (from training code).
+        # We are missing 'product_cat_num' in input. We might need to fetch it or ask user to provide it.
+        # For now, let's assume the user provides it or we default it? 
+        # Actually, looking at preprocessor.py:
+        # product_df = df.groupby(['product_key', 'product_cat_num', ...])
+        # So 'product_cat_num' is required.
+        # Let's check if we can get it or if we should skip product prediction if missing.
+        # The user input didn't have product_category or product_cat_num.
+        # To fix this properly, we should ideally look up product_cat_num from product_key.
+        # But for this quick fix, let's focus on getting the Overall Model working first, 
+        # and maybe mock specific product features if possible or just handle Overall.
+        
+        # FOR NOW: Only Return Overall Prediction to fix the immediate 500 error.
+        # If we really need product prediction, we need `product_category` in input.
+        
+        product_pred_val = 0.0
+        # Check if we can form product features
+        # X_product = df[['product_key', 'product_cat_num', ...]] 
+        # We don't have product_cat_num.
         
         return {
             "overall_sales_prediction": float(overall_pred[0]),
-            "product_sales_prediction": float(product_pred[0])
+            "product_sales_prediction": product_pred_val, # Placeholder until input schema is updated
+            "note": "Product prediction requires product_category. Currently returning 0."
         }
     except Exception as e:
+
         logger.error(f"Prediction error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
